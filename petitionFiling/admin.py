@@ -5,4 +5,6 @@ from .models import *
 
 admin.site.register(Petition)
 admin.site.register(Petitioner)
-admin.site.register(Responded)
+admin.site.register(Respondent)
+admin.site.register(Advocate)
+admin.site.register(Act)
