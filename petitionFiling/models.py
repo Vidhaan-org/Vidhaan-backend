@@ -11,6 +11,7 @@ class Petition(models.Model):
 
 class Petitioner(models.Model):
     # link to one/multiple petition
+    petition=models.ManyToManyField(Petition,null=True,blank=True)
     petitioner_type = models.CharField(null=True,blank=True, max_length=50,choices=choice.PETITION_TYPE,default="")
     petitioner_name = models.CharField(null=True,blank=True, max_length=50)
     petitioner_age = models.CharField(null=True,blank=True, max_length=50)
@@ -27,6 +28,7 @@ class Petitioner(models.Model):
 
 class Respondent(models.Model):
     # link to one/multiple petition
+    petition=models.ManyToManyField(Petition,null=True,blank=True)
     respondent_name = models.CharField(null=True,blank=True, max_length=50)
     respondent_relation = models.CharField(null=True,blank=True, max_length=50)
     respondent_father = models.CharField(null=True,blank=True, max_length=50)
@@ -38,6 +40,7 @@ class Respondent(models.Model):
 
 class Advocate(models.Model):
     # link to one/multiple cases
+    petition=models.ManyToManyField(Petition,null=True,blank=True)
     advocate_name = models.CharField(null=True,blank=True, max_length=50)
     advocate_number = models.IntegerField(null=True,blank=True)
     advocate_year = models.IntegerField(null=True,blank=True)
@@ -46,6 +49,7 @@ class Advocate(models.Model):
     advocate_type=models.CharField(null=True,blank=True, max_length=50,choices=choice.ADVOCATE_TYPE)
 
 class Act(models.Model):
+    petition=models.ManyToManyField(Petition,null=True,blank=True)
     act_title=models.CharField(null=True,blank=True, max_length=150)
     central_rule=models.CharField(null=True,blank=True, max_length=150)
     section=models.CharField(null=True,blank=True, max_length=450)
