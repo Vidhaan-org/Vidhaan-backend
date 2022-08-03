@@ -18,5 +18,6 @@ from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('file_petition/',include('petitionFiling.urls'))
+    path('file_petition/',include('petitionFiling.urls')),
+     path('case/',include('case.urls'))
 ]

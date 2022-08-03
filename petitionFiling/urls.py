@@ -1,8 +1,8 @@
-from django.contrib import admin 
 from django.urls import path
 
-from petitionFiling.views import *
+from .views import *
 namespace=['file_petition']
+
 urlpatterns=[
     path('',FilePetition.as_view()),
     path('add_petitioner/',Petitioner.as_view()),

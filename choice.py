@@ -16,3 +16,8 @@ ADVOCATE_TYPE=[
 CASE_TYPE=[]
 PETITION_TYPE=[]
 CASE_CATEGORY=[]
+
+CASE_STATUS = (
+    ('PENDING', 'Pending'),
+    ('DISPOSED', 'Disposed')
+)

@@ -1,5 +1,5 @@
 from django.db import models
-from pkg_resources import require
+import choice
 
 # Create your models here.
 # Cnr_number
@@ -26,10 +26,7 @@ from pkg_resources import require
 # Next Date
 # history_of_case_hearing
 
-CASE_STATUS = (
-    ('PENDING', 'PENDING'),
-    ('DISPOSED', 'DISPOSED')
-)
+
 class CaseDetails(models.Model):
     cnr_number=models.IntegerField(unique=True, null=False)
     case_type=models.CharField(max_length=50, null=True)
@@ -39,7 +36,7 @@ class CaseDetails(models.Model):
     first_hearing_date=models.DateField(null=True)
     latest_hearing=models.DateField(null=True)
     decision_date=models.DateField(null=True)
-    case_status=models.CharField(max_length=50, null=False, choices=CASE_STATUS)
+    case_status=models.CharField(max_length=50, null=False, choices=choice.CASE_STATUS)
     coram=models.CharField(max_length=50, null=False, blank=True)
     bench=models.CharField(max_length=50, null=True)
     judicial=models.CharField(max_length=50, null=True)
