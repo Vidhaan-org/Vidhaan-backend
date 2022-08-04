@@ -3,7 +3,7 @@ import choice
 from permuser.models import *
 
 class Petitioner(models.Model):
-    petitioner_type = models.CharField(null=True,blank=True,choices=choice.PETITION_TYPE,default="")
+    petitioner_type = models.CharField(null=True,blank=True,choices=choice.PETITION_TYPE,default="",max_length=50)
     petitioner_name = models.CharField(null=True,blank=True, max_length=50)
     petitioner_age = models.CharField(null=True,blank=True, max_length=50)
     petitioner_state = models.CharField(null=True,blank=True, max_length=50)

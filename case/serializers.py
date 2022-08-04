@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import *
 
 
-class CaseDetailsSerializer(serializers.ModelSerializer):
+class CaseSerializer(serializers.ModelSerializer):
     class Meta:
-        model=CaseDetails
+        model=Case
         fields='__all__'

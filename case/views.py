@@ -6,7 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 class CaseDetail(APIView):
     def post(self,request):
-        serializer=CaseDetailsSerializer(data=request.data)
+        serializer=CaseSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response({
@@ -21,8 +21,8 @@ class CaseDetail(APIView):
     def get(self,request,id=None):
         if id:
             try:
-                case=CaseDetails.objects.get(id=id)
-                serializer=CaseDetailsSerializer(case)
+                case=Case.objects.get(id=id)
+                serializer=CaseSerializer(case)
                 return Response({
                     "status_code": 200,
                     "data": serializer.data
@@ -33,8 +33,8 @@ class CaseDetail(APIView):
                     "data": serializer.errors
                 })
         try:
-            cases=CaseDetails.objects.all()
-            serializer=CaseDetailsSerializer(cases,many=True)
+            cases=Case.objects.all()
+            serializer=CaseSerializer(cases,many=True)
             return Response({
                 "status_code": 200,
                 "data": serializer.data
