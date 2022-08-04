@@ -21,3 +21,13 @@ CASE_STATUS = (
     ('PENDING', 'Pending'),
     ('DISPOSED', 'Disposed')
 )
+SPECIAL_CATEGORY=[
+    ('SENIOR_CITIZEN_GT_65'),
+    ('SC/ST'),
+    ('WOMAN/CHILD'),
+    ('DIVYANG'),
+    ('LEGAL_AID_CASE'),
+    ('IN_CUSTODY')
+]
+PURPOSE_OF_HEARING=[]
+IA_STATUS=[]

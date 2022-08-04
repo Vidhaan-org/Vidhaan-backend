@@ -1,55 +1,23 @@
 from django.db import models
-import choice
+from petitionFiling.models import *
+from history.models import *    
 
-# Create your models here.
-# Cnr_number
-# case_type
-# filling_number
-# registration_number
-# fiiling_date
-# registration_number
-# First Hearing Date
-# latest_hearing
-# Decision Date
-# Case Status
-# Nature of Disposal
-# Coram
-# Bench
-# Judicial
-# Petitioner
-# P. Advocate
-# Respondent
-# R. Advocate
-# Judge(s)
-# Acts
-# Section
-# Next Date
-# history_of_case_hearing
-
-
-class CaseDetails(models.Model):
+class Case(models.Model):
     cnr_number=models.IntegerField(unique=True, null=False)
     case_type=models.CharField(max_length=50, null=True)
     filling_number=models.IntegerField(null=False)
     registration_number=models.IntegerField(null=False)
-    filling_date=models.DateField(null=True)
-    first_hearing_date=models.DateField(null=True)
-    latest_hearing=models.DateField(null=True)
-    decision_date=models.DateField(null=True)
-    case_status=models.CharField(max_length=50, null=False, choices=choice.CASE_STATUS)
-    coram=models.CharField(max_length=50, null=False, blank=True)
-    bench=models.CharField(max_length=50, null=True)
-    judicial=models.CharField(max_length=50, null=True)
-    petitioner=models.CharField(max_length=50, null=True)
-    p_advocate=models.CharField(max_length=50, null=True)
-    respondent=models.CharField(max_length=50, null=True)
-    r_advocate=models.CharField(max_length=50, null=True)
-    judge=models.CharField(max_length=50, null=True)
-    acts=models.CharField(max_length=50, null=True)
-    section=models.CharField(max_length=50, null=True)
-    next_date=models.DateField(null=True)
-    history_of_case_hearing=models.TextField(null=True)
-    def __str__(self):
-        return str(self.cnr_number)
+    registration_number=models.DateField(null=True)
+    case_status=models.ForeignKey(to=CaseStatus,null=True,blank=True,default="")
+    petitioner=models.ManyToManyField(Petitioner,null=True,blank=True)
+    respondent=models.ManyToManyField(Respondent,null=True,blank=True)
+    advocate=models.ManyToManyField(Advocate,null=True,blank=True)
+    act=models.ManyToManyField(Act,null=True,blank=True)
+    ia=models.ForeignKey(to=IADetails,null=True,blank=True,default="")
+    history=models.ForeignKey(to=History,null=True,blank=True,default="")
+    order=models.ForeignKey(to=Order,null=True,blank=True,default="")
+    objection=models.ForeignKey(to=Objection,null=True,blank=True,default="")
+    document=models.ForeignKey(to=DocumentDetails,null=True,blank=True,default="")
+
 
 
