@@ -62,11 +62,11 @@ class Case(models.Model):
     respondent=models.ManyToManyField(Respondent,null=True,blank=True)
     advocate=models.ManyToManyField(Advocate,null=True,blank=True)
     act=models.ManyToManyField(Act,null=True,blank=True)
-    ia=models.ForeignKey(to=IADetails,null=True,blank=True,default="",on_delete=models.CASCADE)
-    history=models.ForeignKey(to=History,null=True,blank=True,default="",on_delete=models.CASCADE)
-    order=models.ForeignKey(to=Order,null=True,blank=True,default="",on_delete=models.CASCADE)
-    objection=models.ForeignKey(to=Objection,null=True,blank=True,default="",on_delete=models.CASCADE)
-    document=models.ForeignKey(to=DocumentDetails,null=True,blank=True,default="",on_delete=models.CASCADE)
+    ia=models.ManyToManyField(IADetails,null=True,blank=True)
+    history=models.ManyToManyField(History,null=True,blank=True)
+    order=models.ManyToManyField(Order,null=True,blank=True)
+    objection=models.ManyToManyField(Objection,null=True,blank=True)
+    document=models.ManyToManyField(DocumentDetails,null=True,blank=True)
 
 
 
