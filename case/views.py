@@ -1,4 +1,3 @@
-from typing import List
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import *
@@ -67,7 +66,8 @@ class CaseList(ListAPIView):
         queryset=Case.objects.all()
         query=self.request.query_params.get('query')
         if query is not None:  
-            return queryset.filter(case_status_details__case_status__icontains=query) or queryset.filter(cnr_number__iexact=query) or queryset.filter(petitioner__petitioner_name__icontains=query) or queryset.filter(respondent__respondent_name__icontains=query) 
+            return queryset.filter(case_status__icontains=query) 
+            # or queryset.filter(cnr_number__iexact=query) or queryset.filter(petitioner__petitioner_name__icontains=query) or queryset.filter(respondent__respondent_name__icontains=query) 
         else: 
             return queryset
 
