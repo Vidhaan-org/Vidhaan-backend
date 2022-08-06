@@ -65,11 +65,11 @@ class Case(models.Model):
     advocate=models.ManyToManyField(Advocate,null=True,blank=True,related_name='case_advocate')
     act=models.ManyToManyField(Act,null=True,blank=True,related_name='case_act')
 
-    ia=models.ForeignKey(to=IADetails,null=True,blank=True,default="",on_delete=models.CASCADE,related_name='ia_details')
-    history=models.ForeignKey(to=History,null=True,blank=True,default="",on_delete=models.CASCADE,related_name='case_history')
-    order=models.ForeignKey(to=Order,null=True,blank=True,default="",on_delete=models.CASCADE,related_name='case_order')
-    objection=models.ForeignKey(to=Objection,null=True,blank=True,default="",on_delete=models.CASCADE,related_name='case_objection')
-    document=models.ForeignKey(to=DocumentDetails,null=True,blank=True,default="",on_delete=models.CASCADE,related_name='case_document')
+    ia=models.ManyToManyField(IADetails,null=True,blank=True,default="",related_name='ia_details')
+    history=models.ManyToManyField(History,null=True,blank=True,default="",related_name='case_history')
+    order=models.ManyToManyField(Order,null=True,blank=True,default="",related_name='case_order')
+    objection=models.ManyToManyField(Objection,null=True,blank=True,default="",related_name='case_objection')
+    document=models.ManyToManyField(DocumentDetails,null=True,blank=True,default="",related_name='case_document')
 
 
 class Notification(models.Model):
