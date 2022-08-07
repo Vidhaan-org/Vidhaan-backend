@@ -1,1 +1,1 @@
-web: gunicorn vidhaan.wsgi:application --log-file -
+web: gunicorn vidhaan.wsgi --log-file -
