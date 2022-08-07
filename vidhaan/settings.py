@@ -29,7 +29,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-DEBUG_COLLECTSTATIC=1
+DISABLE_COLLECTSTATIC=1
 
 
 # Application definition
