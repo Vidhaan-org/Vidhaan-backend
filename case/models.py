@@ -9,7 +9,7 @@ class Case(models.Model):
     cnr_number=models.IntegerField(unique=True, null=True)
     case_type=models.CharField(max_length=50, null=True,blank=True,choices=choice.CASE_TYPE)
     filling_number=models.IntegerField(null=True)
- #   registration_number=models.IntegerField(null=True)
+    registration_number=models.IntegerField()
 
 
 class IADetails(models.Model):
