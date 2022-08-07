@@ -29,8 +29,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-DEBUG_COLLECTSTATIC=1
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+DISABLE_COLLECTSTATIC=1
+
 
 # Application definition
 SECRET_KEY="4335956fc5ec4f96djsk5b29414b067d8ff4b"
