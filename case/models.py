@@ -1,5 +1,5 @@
 from django.db import models
-from petitionFiling.models import Petitioner
+from petitionFiling.models import *
 from permuser.models import * 
 
 from django.contrib.auth import get_user_model
