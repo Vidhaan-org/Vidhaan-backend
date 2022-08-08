@@ -15,9 +15,4 @@ class Petition(models.Model):
 
     petitioner=models.ManyToManyField(Petitioner,null=True,blank=True,related_name='petition_petitioner')
     respondent=models.ManyToManyField(Respondent,null=True,blank=True,related_name='petition_respondent')
-<<<<<<< HEAD
     act=models.ManyToManyField(Act,null=True,blank=True,related_name='petition_act')
-
-=======
-    act=models.ManyToManyField(Act,null=True,blank=True,related_name='petition_act')
->>>>>>> rahul

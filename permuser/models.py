@@ -72,8 +72,4 @@ class PersonInvolved(models.Model):
     person_address = models.CharField(null=True,blank=True, max_length=200)
     person_state = models.CharField(null=True,blank=True, max_length=50)
     person_city = models.CharField(null=True,blank=True, max_length=50)
-<<<<<<< HEAD
     person_pin = models.IntegerField(null=True,blank=True)
-=======
-    person_pin = models.IntegerField(null=True,blank=True)
->>>>>>> rahul

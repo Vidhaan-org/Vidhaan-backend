@@ -1,9 +1,5 @@
 from django.db import models
-<<<<<<< HEAD
-from petitionFiling.models import Petitioner,Respondent
-=======
-from petitionFiling.models import Petitioner
->>>>>>> rahul
+
 from permuser.models import * 
 
 from django.contrib.auth import get_user_model
@@ -56,12 +52,12 @@ class CaseStatus(models.Model):
     decision_date=models.DateField(null=True,blank=True,default=None)
     case_status=models.CharField(max_length=50, null=True, choices=choice.CASE_STATUS)
     next_date=models.DateField(null=True,blank=True,default=None) 
-<<<<<<< HEAD
 
 
 class Case(models.Model):
     cnr_number=models.IntegerField(unique=True, null=True)
     case_type=models.CharField(max_length=50, null=True,blank=True,choices=choice.CASE_TYPE)
+    
     filling_number=models.IntegerField(null=True)
     registration_number=models.IntegerField(null=True)
 
@@ -85,32 +81,3 @@ class Notification(models.Model):
     action_date=models.DateField(null=True,blank=True,default=None) 
     is_notification_recieved=models.BooleanField(null=False,blank=True,default=False)
 
-=======
-
-
-class Case(models.Model):
-    cnr_number=models.IntegerField(unique=True, null=True)
-    case_type=models.CharField(max_length=50, null=True,blank=True,choices=choice.CASE_TYPE)
-    filling_number=models.IntegerField(null=True)
-    registration_number=models.IntegerField(null=True)
-
-    petitioner=models.ManyToManyField(Petitioner,null=True,blank=True,related_name='case_petitioner')
-    respondent=models.ManyToManyField(Respondent,null=True,blank=True,related_name='case_respondent')
-    advocate=models.ManyToManyField(Advocate,null=True,blank=True,related_name='case_advocate')
-    act=models.ManyToManyField(Act,null=True,blank=True,related_name='case_act')
->>>>>>> rahul
-
-    ia=models.ManyToManyField(IADetails,null=True,blank=True,default="",related_name='ia_details')
-    history=models.ManyToManyField(History,null=True,blank=True,default="",related_name='case_history')
-    order=models.ManyToManyField(Order,null=True,blank=True,default="",related_name='case_order')
-    objection=models.ManyToManyField(Objection,null=True,blank=True,default="",related_name='case_objection')
-    document=models.ManyToManyField(DocumentDetails,null=True,blank=True,default="",related_name='case_document')
-
-
-class Notification(models.Model):
-    case=models.ManyToManyField(Case,null=True,blank=True,default="",related_name='case_notifications')
-    case_title=models.CharField(max_length=250, null=True,blank=True)
-    case_description=models.CharField(max_length=500, null=True,blank=True)
-    notification_date=models.DateField(null=True,blank=True,default=None) 
-    action_date=models.DateField(null=True,blank=True,default=None) 
-    is_notification_recieved=models.BooleanField(null=False,blank=True,default=False)
