@@ -17,6 +17,13 @@ class FilePetition(APIView):
                 "status_code": 400,
                 "data": serializer.errors
             })
+    def get(self,reques):
+        petition=Petition.objects.all()
+        serializer=PetitionSerializer(petition,many=True)
+        return Response({
+                "status_code": 200,
+                "data": serializer.data
+        })
 
 
 
