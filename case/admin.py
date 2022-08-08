@@ -10,4 +10,8 @@ admin.site.register(DocumentDetails)
 admin.site.register(CaseStatus)
 admin.site.register(Notification)
 # admin.site.register(CasePetitioner)
+<<<<<<< HEAD
 # admin.site.register(CaseRespondent)
+=======
+# admin.site.register(CaseRespondent)
+>>>>>>> rahul
