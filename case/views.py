@@ -6,9 +6,11 @@ from .models import *
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.generics import ListAPIView
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.permissions import IsAuthenticated
 
 
 class CaseDetail(APIView):
+    permission_classes = [IsAuthenticated]
     def post(self,request):
         serializer=CaseSerializer(data=request.data)
         if serializer.is_valid():
@@ -61,7 +63,9 @@ class CaseDetail(APIView):
         
             
 class CaseList(ListAPIView):
+    permission_classes = [IsAuthenticated]
     serializer_class=CaseSerializer
+
 
     def get_queryset(self):
         queryset=Case.objects.all()
