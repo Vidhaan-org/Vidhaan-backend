@@ -2,8 +2,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import *
 from .models import *
+from rest_framework.generics import GenericAPIView
 
-class FilePetition(APIView):
+class FilePetition(GenericAPIView):
     def post(self,request):
         serializer=PetitionSerializer(data=request.data)
         if serializer.is_valid():

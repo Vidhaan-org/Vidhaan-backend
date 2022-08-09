@@ -6,9 +6,10 @@ from .models import *
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.generics import ListAPIView
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.generics import GenericAPIView
 
 
-class CaseDetail(APIView):
+class CaseDetail(GenericAPIView):
     def post(self,request):
         serializer=CaseSerializer(data=request.data)
         if serializer.is_valid():

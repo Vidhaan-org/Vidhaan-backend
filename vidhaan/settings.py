@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'case',
     'permuser',
     'petitionFiling',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
