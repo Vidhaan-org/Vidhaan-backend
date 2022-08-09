@@ -7,9 +7,10 @@ from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.generics import ListAPIView
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.generics import GenericAPIView
 
 
-class CaseDetail(APIView):
+class CaseDetail(GenericAPIView):
     permission_classes = [IsAuthenticated]
     def post(self,request):
         serializer=CaseSerializer(data=request.data)
