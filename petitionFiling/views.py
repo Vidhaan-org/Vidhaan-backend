@@ -26,5 +26,13 @@ class FilePetition(GenericAPIView):
                 "data": serializer.data
         })
 
+    def get(self,request):
+        petition=Petition.objects.all()
+        serializer=PetitionSerializer(petition)
+        print(serializer.data)
+        return Response({
+            "status_code": 200,
+            "data": serializer.data
+        })
 
 
