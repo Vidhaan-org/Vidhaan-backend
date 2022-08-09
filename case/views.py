@@ -5,7 +5,8 @@ from .serializers import *
 from .models import *
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.generics import ListAPIView
-from django_filters.rest_framework import DjangoFilterBackend
+from django_filters.rest_framework import *
+from rest_framework import filters
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.generics import GenericAPIView
 
@@ -66,6 +67,11 @@ class CaseDetail(GenericAPIView):
 class CaseList(ListAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class=CaseSerializer
+    filter_backends = [DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter]
+    filterset_fields = ['cnr_number', 'registration_number']
+    ordering_fields = ['cnr_number']
+    search_fields = ['cnr_number', 'registration_number']
+
 
 
     def get_queryset(self):
