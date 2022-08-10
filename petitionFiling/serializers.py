@@ -3,7 +3,6 @@ from rest_framework import serializers
 from permuser.serializers import PetitionerSerializer,RespondentSerializer,ActSerializer
 from .models import *
 
-
 class PetitionSerializer(serializers.ModelSerializer):
     petitioner=serializers.SerializerMethodField('petition_petitioner')
     respondent=serializers.SerializerMethodField('petition_petitioner')
@@ -32,5 +31,3 @@ class PetitionSerializer(serializers.ModelSerializer):
         except Act.DoesNotExist: 
             return False
         return ActSerializer(query).data
-
-        

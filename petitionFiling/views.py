@@ -2,8 +2,11 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import *
 from .models import *
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.generics import GenericAPIView
 
-class FilePetition(APIView):
+class FilePetition(GenericAPIView):
+    permission_classes = [IsAuthenticated]
     def post(self,request):
         serializer=PetitionSerializer(data=request.data)
         if serializer.is_valid():
@@ -17,6 +20,22 @@ class FilePetition(APIView):
                 "status_code": 400,
                 "data": serializer.errors
             })
+    def get(self,reques):
+        petition=Petition.objects.all()
+        serializer=PetitionSerializer(petition,many=True)
+        permission_classes = [IsAuthenticated]
+        return Response({
+                "status_code": 200,
+                "data": serializer.data
+        })
 
+    def get(self,request):
+        petition=Petition.objects.all()
+        serializer=PetitionSerializer(petition)
+        print(serializer.data)
+        return Response({
+            "status_code": 200,
+            "data": serializer.data
+        })
 
 

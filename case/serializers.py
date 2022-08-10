@@ -28,76 +28,79 @@ class DocumentDetailsSerializer(serializers.ModelSerializer):
         fields='__all__'
 
 class CaseSerializer(serializers.ModelSerializer):
-    petitioner=serializers.SerializerMethodField('case_petitioner')
-    respondent=serializers.SerializerMethodField('case_petitioner')
-    act=serializers.SerializerMethodField('case_act')
-    advocate=serializers.SerializerMethodField('case_advocate')
+    petitioner=serializers.SerializerMethodField('get_petitioner')
+    respondent=serializers.SerializerMethodField('get_respondent')
+    act=serializers.SerializerMethodField('get_act')
+    advocate=serializers.SerializerMethodField('get_advocate')
 
-    ia=serializers.SerializerMethodField('ia_details')
-    history=serializers.SerializerMethodField('case_history')
-    order=serializers.SerializerMethodField('case_order')
-    objection=serializers.SerializerMethodField('case_objection')
-    document=serializers.SerializerMethodField('case_document')
-
+    ia=serializers.SerializerMethodField('get_ia')
+    history=serializers.SerializerMethodField('get_history')
+    order=serializers.SerializerMethodField('get_order')
+    objection=serializers.SerializerMethodField('get_objection')
+    document=serializers.SerializerMethodField('get_document')
     class Meta:
         model=Case
-        fields='__all__'
-
-    def create(self,**validate_data):
-        return Case.objects.create(**validate_data)
+        fields=["cnr_number", "case_type","filling_number","registration_number","petitioner","respondent","act","advocate","ia","history","order","objection","document"]
 
     def get_petitioner(self,instance):
         try: 
-            query=Petitioner.objects.get(user=instance)
+            query=Petitioner.objects.all()
         except Petitioner.DoesNotExist: 
             return False
-        return PetitionerSerializer(query).data
+        return PetitionerSerializer(query,many=True).data
 
     def get_respondent(self,instance):
         try: 
-            query=Respondent.objects.get(user=instance)
+            query=Respondent.objects.all()
         except Respondent.DoesNotExist: 
             return False
-        return RespondentSerializer(query).data
+        return RespondentSerializer(query,many=True).data
 
     def get_act(self,instance):
         try: 
-            query=Act.objects.get(user=instance)
+            query=Act.objects.all()
         except Act.DoesNotExist: 
             return False
-        return ActSerializer(query).data
+        return ActSerializer(query,many=True).data
+    
+    def get_advocate(self,instance):
+        try: 
+            query=Advocate.objects.all()
+        except Advocate.DoesNotExist: 
+            return False
+        return AdvocateSerializer(query,many=True).data
 
     def get_ia(self,instance):
         try: 
-            query=IADetails.objects.get(user=instance)
+            query=IADetails.objects.all()
         except Petitioner.DoesNotExist: 
             return False
-        return IADetailsSerializer(query).data
-    
+        return IADetailsSerializer(query,many=True).data
+
     def get_history(self,instance):
         try: 
-            query=History.objects.get(user=instance)
+            query=History.objects.all()
         except History.DoesNotExist: 
             return False
-        return HistorySerializer(query).data
+        return HistorySerializer(query,many=True).data
 
     def get_order(self,instance):
         try: 
-            query=Order.objects.get(user=instance)
-        except Order.DoesNotExist: 
+            query=Order.objects.all()
+        except Order.DoesNotExist:  
             return False
-        return OrderSerializer(query).data
+        return OrderSerializer(query,many=True).data
 
     def get_objection(self,instance):
         try: 
-            query=Objection.objects.get(user=instance)
+            query=Objection.objects.all()
         except Objection.DoesNotExist: 
             return False
-        return ObjectionSerializer(query).data
+        return ObjectionSerializer(query,many=True).data
 
     def get_document(self,instance):
         try: 
-            query=DocumentDetails.objects.get(user=instance)
+            query=DocumentDetails.objects.all()
         except DocumentDetails.DoesNotExist: 
             return False
-        return DocumentDetailsSerializer(query).data
+        return DocumentDetailsSerializer(query,many=True).data
