@@ -21,10 +21,10 @@ class CaseDetail(GenericAPIView):
             serializer.save()
 
             #sending mail
-            case_number = request.POST['cnr_number']
+            # case_number = request.POST['cnr_number']
             send_mail(
-                'Case Update' + case_number,
-                'There is new update on the case',
+                'Case Added', #+ case_number,
+                'New case added',
                 'vidhaan.inbox@gmail.com',
                 ['suryansh.1191@gmail.com', 'rahulkesharwani353@gmail.com', 'sonaljain067@gmail.com', 'dewansh.dt@gmail.com', 'emailanubhavagrawal@gmail.com', 'singh.20atulya@gmail.com']
             )    
@@ -78,12 +78,12 @@ class CaseDetail(GenericAPIView):
             
 class CaseList(ListAPIView):
     permission_classes = [IsAuthenticated]
-    send_mail(
-                'Case Update',
-                'There is new update on the case',
-                'vidhaan.inbox@gmail.com',
-                ['suryansh.1191@gmail.com', 'rahulkesharwani353@gmail.com', 'sonaljain067@gmail.com', 'dewansh.dt@gmail.com', 'emailanubhavagrawal@gmail.com']
-            ) 
+    # send_mail(
+    #             'Case Update',
+    #             'There is new update on the case',
+    #             'vidhaan.inbox@gmail.com',
+    #             ['suryansh.1191@gmail.com', 'rahulkesharwani353@gmail.com', 'sonaljain067@gmail.com', 'dewansh.dt@gmail.com', 'emailanubhavagrawal@gmail.com']
+    #         ) 
     serializer_class=CaseSerializer
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter]
     filterset_fields = ['cnr_number', 'registration_number']
