@@ -4,30 +4,19 @@ from permuser.serializers import PetitionerSerializer,RespondentSerializer,ActSe
 from .models import *
 
 class PetitionSerializer(serializers.ModelSerializer):
-    petitioner=serializers.SerializerMethodField('petition_petitioner')
-    respondent=serializers.SerializerMethodField('petition_petitioner')
-    act=serializers.SerializerMethodField('petition_act')
+    petitioner=serializers.SerializerMethodField('get_petitioner')
+    respondent=serializers.SerializerMethodField('get_respondent')
+    act=serializers.SerializerMethodField('get_act')
     class Meta:
         model=Petition
-        fields=["case_type","case_category","special_category","court","state","district"]
+        fields=["case_type","case_category","special_category","court","state","district","petitioner","respondent","act"]
 
     def get_petitioner(self,instance):
-        try: 
-            query=Petitioner.objects.get(user=instance)
-        except Petitioner.DoesNotExist: 
-            return False
-        return PetitionerSerializer(query).data
+        return PetitionerSerializer(instance.petitioner,many=True).data
 
     def get_respondent(self,instance):
-        try: 
-            query=Respondent.objects.get(user=instance)
-        except Respondent.DoesNotExist: 
-            return False
-        return RespondentSerializer(query).data
+        return RespondentSerializer(instance.respondent,many=True).data
 
     def get_act(self,instance):
-        try: 
-            query=Act.objects.get(user=instance)
-        except Act.DoesNotExist: 
-            return False
-        return ActSerializer(query).data
+        return ActSerializer(instance.act,many=True).data
+        

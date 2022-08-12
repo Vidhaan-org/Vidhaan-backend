@@ -1,8 +1,8 @@
 from django.contrib import admin
 from .models import *
 
-<<<<<<< HEAD
-=======
 
->>>>>>> rahul
-admin.site.register(Petition)
+class PetitionAdmin(admin.ModelAdmin):
+    list_display=['case_type','petitioners','respondents','acts']
+
+admin.site.register(Petition,PetitionAdmin)

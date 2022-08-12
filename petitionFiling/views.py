@@ -20,22 +20,17 @@ class FilePetition(GenericAPIView):
                 "status_code": 400,
                 "data": serializer.errors
             })
-    def get(self,reques):
-        petition=Petition.objects.all()
-        serializer=PetitionSerializer(petition,many=True)
-        permission_classes = [IsAuthenticated]
-        return Response({
-                "status_code": 200,
-                "data": serializer.data
-        })
-
     def get(self,request):
         petition=Petition.objects.all()
-        serializer=PetitionSerializer(petition)
-        print(serializer.data)
+        serializer=PetitionSerializer(petition,many=True)
+        # query=Petition.petitioner.through.objects.all()
+        # petitioner=PetitionerSerializer(query,many=True).data
+        # return PetitionerSerializer(query,many=True).data
+        # print(petition_petitioner.objects.all())
+        permission_classes = [IsAuthenticated]
         return Response({
             "status_code": 200,
-            "data": serializer.data
+            "data": serializer.data,
+            # "petitioners": petitioner
         })
-
 

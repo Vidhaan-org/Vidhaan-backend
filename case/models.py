@@ -72,6 +72,15 @@ class Case(models.Model):
     objection=models.ManyToManyField(Objection,null=True,blank=True,default="",related_name='case_objection')
     document=models.ManyToManyField(DocumentDetails,null=True,blank=True,default="",related_name='case_document')
 
+    def petitioners(self):
+        return ", ".join([str(p) for p in self.petitioner.all()])
+
+    def respondents(self):
+        return ", ".join([str(p) for p in self.respondent.all()])
+
+    def acts(self):
+        return ", ".join([str(p) for p in self.act.all()])
+
 
 class Notification(models.Model):
     case=models.ManyToManyField(Case,null=True,blank=True,default="",related_name='case_notifications')

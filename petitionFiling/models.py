@@ -16,3 +16,13 @@ class Petition(models.Model):
     petitioner=models.ManyToManyField(Petitioner,null=True,blank=True,related_name='petition_petitioner')
     respondent=models.ManyToManyField(Respondent,null=True,blank=True,related_name='petition_respondent')
     act=models.ManyToManyField(Act,null=True,blank=True,related_name='petition_act')
+
+
+    def petitioners(self):
+        return ", ".join([str(p) for p in self.petitioner.all()])
+
+    def respondents(self):
+        return ", ".join([str(p) for p in self.respondent.all()])
+
+    def acts(self):
+        return ", ".join([str(p) for p in self.act.all()])
