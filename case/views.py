@@ -1,3 +1,5 @@
+from email import message
+from typing import List
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import *
@@ -8,6 +10,7 @@ from django_filters.rest_framework import *
 from rest_framework import filters
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.generics import GenericAPIView
+from django.core.mail import send_mail
 
 
 class CaseDetail(GenericAPIView):
@@ -16,6 +19,16 @@ class CaseDetail(GenericAPIView):
         serializer=CaseSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
+
+            #sending mail
+            # case_number = request.POST['cnr_number']
+            send_mail(
+                'Case Added', #+ case_number,
+                'New case added',
+                'vidhaan.inbox@gmail.com',
+                ['suryansh.1191@gmail.com', 'rahulkesharwani353@gmail.com', 'sonaljain067@gmail.com', 'dewansh.dt@gmail.com', 'emailanubhavagrawal@gmail.com', 'singh.20atulya@gmail.com']
+            )    
+            #
             return Response({
                 "status_code": 200,
                 "data": serializer.data
@@ -65,6 +78,12 @@ class CaseDetail(GenericAPIView):
             
 class CaseList(ListAPIView):
     permission_classes = [IsAuthenticated]
+    # send_mail(
+    #             'Case Update',
+    #             'There is new update on the case',
+    #             'vidhaan.inbox@gmail.com',
+    #             ['suryansh.1191@gmail.com', 'rahulkesharwani353@gmail.com', 'sonaljain067@gmail.com', 'dewansh.dt@gmail.com', 'emailanubhavagrawal@gmail.com']
+    #         ) 
     serializer_class=CaseSerializer
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter]
     filterset_fields = ['cnr_number', 'registration_number']

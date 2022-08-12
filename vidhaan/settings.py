@@ -31,8 +31,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-DISABLE_COLLECTSTATIC=1
-
 
 # Application definition
 SECRET_KEY="4335956fc5ec4f96djsk5b29414b067d8ff4b"
@@ -61,8 +59,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-'django.middleware.common.CommonMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'vidhaan.urls'
@@ -79,6 +76,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries': {
+                'staticfiles': 'django.templatetags.static',
+            },
         },
     },
 ]
@@ -96,7 +96,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-DISABLE_COLLECTSTATIC: 1
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -117,8 +117,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 #manage JWT tockens
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=69),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=69),
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': False,
     'UPDATE_LAST_LOGIN': False,
@@ -169,5 +169,12 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
+
+# Email init
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'vidhaan.inbox@gmail.com'
+EMAIL_HOST_PASSWORD = 'akbctlbfyeepyswm'
+EMAIL_USE_TLS = True
 
 django_heroku.settings(locals())
