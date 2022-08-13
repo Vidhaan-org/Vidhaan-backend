@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'petitionFiling',
     'django.contrib.staticfiles',  # required for serving swagger ui's css/js files
     'drf_yasg',
+    'graphene_django',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
