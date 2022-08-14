@@ -25,7 +25,7 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from django.conf import settings
 from graphene_django.views import GraphQLView
-from vidhaan.schema import schema
+from case.schema import schema
 from django.views.decorators.csrf import csrf_exempt
 
 
