@@ -31,6 +31,7 @@ class DocumentDetails(models.Model):
     filed_by=models.ForeignKey(to=Users,null=True,blank=True,default="",on_delete=models.CASCADE)
     advocate=models.ForeignKey(to=Advocate,null=True,blank=True,default="",on_delete=models.CASCADE)
     document=models.FileField(upload_to="document/",null=True, blank=True)
+    document_type=models.CharField(max_length=50, null=True,blank=True)
 
 class History(models.Model):
     cause_list_type=models.CharField(max_length=50, null=True,blank=True)
