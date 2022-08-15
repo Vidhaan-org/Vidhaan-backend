@@ -40,7 +40,12 @@ class History(models.Model):
     purpose_of_hearing=models.CharField(null=True,blank=True, max_length=50,choices=choice.PURPOSE_OF_HEARING,default="")
 
 
-class CaseStatus(models.Model):
+class Case(models.Model):
+    cnr_number=models.IntegerField(unique=True, null=True)
+    case_type=models.CharField(max_length=50, null=True,blank=True,choices=choice.CASE_TYPE)
+    filling_number=models.IntegerField(null=True)
+    registration_number=models.IntegerField(null=True)
+
     stage_of_case=models.CharField(max_length=50, null=True, blank=True)
     coram=models.CharField(max_length=50, null=True, blank=True,default="")
     bench=models.CharField(max_length=50, null=True,blank=True,default="")
@@ -54,13 +59,6 @@ class CaseStatus(models.Model):
     case_status=models.CharField(max_length=50, null=True, choices=choice.CASE_STATUS)
     next_date=models.DateField(null=True,blank=True,default=None) 
 
-
-class Case(models.Model):
-    cnr_number=models.IntegerField(unique=True, null=True)
-    case_type=models.CharField(max_length=50, null=True,blank=True,choices=choice.CASE_TYPE)
-    filling_number=models.IntegerField(null=True)
-    registration_number=models.IntegerField(null=True)
-
     petitioner=models.ManyToManyField(Petitioner,null=True,blank=True,related_name='case_petitioner')
     respondent=models.ManyToManyField(Respondent,null=True,blank=True,related_name='case_respondent')
     advocate=models.ManyToManyField(Advocate,null=True,blank=True,related_name='case_advocate')
@@ -71,7 +69,6 @@ class Case(models.Model):
     order=models.ManyToManyField(Order,null=True,blank=True,default="",related_name='case_order')
     objection=models.ManyToManyField(Objection,null=True,blank=True,default="",related_name='case_objection')
     document=models.ManyToManyField(DocumentDetails,null=True,blank=True,default="",related_name='case_document')
-    case_status=models.ForeignKey(to=CaseStatus,null=True,blank=True,related_name='status_of_case',on_delete=models.CASCADE)
     person_involved=models.ManyToManyField(PersonInvolved,null=True,blank=True,default="",related_name='person_involved')
 
 
@@ -99,5 +96,5 @@ class TrackCases(models.Model):
     action_status= models.CharField(blank=True, choices=choice.TRACK_TYPE, max_length=150, null=True)
     action_description=models.CharField(max_length=250, null=True,blank=True)
     action_date=models.DateField(null=True,blank=True,default=None) 
-    action_taken_by=models.ForeignKey(to=CaseStatus,null=True,blank=True,related_name='action_taken_by',on_delete=models.CASCADE)
+    action_taken_by=models.ForeignKey(to=Users,null=True,blank=True,related_name='action_taken_by',on_delete=models.CASCADE)
     case=models.ForeignKey(Case,null=True,blank=True,default="",related_name='case_track',on_delete=models.CASCADE)
