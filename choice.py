@@ -147,3 +147,15 @@ SPECIAL_CATEGORY=[
 ]
 PURPOSE_OF_HEARING=[]
 IA_STATUS=[]
+NOTIFY_TYPE=[
+    ('New Case Update', 'New Case Update'), 
+    ('Doc Deadline', 'Doc Deadline'), 
+    ('Hearing Update', 'Hearing Update'), 
+    ('Next Hearing', 'Next Hearing'), 
+    ('Hearing in 2 days', 'Hearing in 2 days')
+]
+
+TRACK_TYPE=[
+    ('Case Dates Updated', 'Case Dates Updated'), 
+    ('Doc Updated', 'Doc Updated')
+]

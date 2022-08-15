@@ -37,6 +37,9 @@ class Act(models.Model):
     rule_no=models.IntegerField(null=True,blank=True)
     act_belong_to=models.CharField(null=True,blank=True, max_length=50,choices=choice.ACT_BELONG_TO)
 
+    def __str__(self):
+        return "%s" %(self.section)
+
 
 class Petitioner(models.Model):
     petitioner_type = models.CharField(null=True,blank=True,choices=choice.PETITION_TYPE,default="",max_length=50)
@@ -53,6 +56,10 @@ class Petitioner(models.Model):
     petitioner_district = models.CharField(null=True,blank=True, max_length=50)
     petitioner_total_petition = models.IntegerField(null=True,blank=True)
 
+    def __str__(self):
+        return "%s" %(self.petitioner_name)
+
+
 class Respondent(models.Model):
     respondent_name = models.CharField(null=True,blank=True, max_length=50)
     respondent_relation = models.CharField(null=True,blank=True, max_length=50)
@@ -62,6 +69,10 @@ class Respondent(models.Model):
     respondent_country = models.CharField(null=True,blank=True, max_length=50)
     petitioner_city = models.CharField(null=True,blank=True, max_length=50)
     petitioner_email = models.CharField(null=True,blank=True, max_length=50)
+
+    def __str__(self):
+        return "%s" %(self.respondent_name)
+
 
 
 class PersonInvolved(models.Model):
@@ -73,3 +84,6 @@ class PersonInvolved(models.Model):
     person_state = models.CharField(null=True,blank=True, max_length=50)
     person_city = models.CharField(null=True,blank=True, max_length=50)
     person_pin = models.IntegerField(null=True,blank=True)
+    
+    def __str__(self):
+        return "%s" %(self.person_name)

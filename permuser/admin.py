@@ -6,7 +6,10 @@ from .models import *
 
 admin.site.register(UserPermission)
 admin.site.register(EmployeeModel)
-admin.site.register(Petitioner)
+
+class PetitionerAdmin(admin.ModelAdmin):
+    list_display=['petitioner_name']
+admin.site.register(Petitioner,PetitionerAdmin)
 admin.site.register(Respondent)
 admin.site.register(Act)
 admin.site.register(Advocate)

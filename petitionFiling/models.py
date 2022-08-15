@@ -12,6 +12,7 @@ class Petition(models.Model):
     court=models.CharField(null=True,blank=True, max_length=50, choices=choice.COURT)
     state=models.CharField(max_length=50, null=True,blank=True)
     district=models.CharField(max_length=50, null=True,blank=True)
+    # petition_file_date
 
     petitioner=models.ManyToManyField(Petitioner,null=True,blank=True,related_name='petition_petitioner')
     respondent=models.ManyToManyField(Respondent,null=True,blank=True,related_name='petition_respondent')

@@ -70,7 +70,18 @@ class Case(models.Model):
     order=models.ManyToManyField(Order,null=True,blank=True,default="",related_name='case_order')
     objection=models.ManyToManyField(Objection,null=True,blank=True,default="",related_name='case_objection')
     document=models.ManyToManyField(DocumentDetails,null=True,blank=True,default="",related_name='case_document')
+    status=models.ForeignKey(to=CaseStatus,null=True,blank=True,related_name='status',on_delete=models.CASCADE)
+    person_involved=models.ManyToManyField(PersonInvolved,null=True,blank=True,default="",related_name='person_involved')
 
+
+    def petitioners(self):
+        return ", ".join([str(p) for p in self.petitioner.all()])
+
+    def respondents(self):
+        return ", ".join([str(p) for p in self.respondent.all()])
+
+    def acts(self):
+        return ", ".join([str(p) for p in self.act.all()])
 
 class Notification(models.Model):
     case=models.ManyToManyField(Case,null=True,blank=True,default="",related_name='case_notifications')
@@ -79,3 +90,13 @@ class Notification(models.Model):
     notification_date=models.DateField(null=True,blank=True,default=None) 
     action_date=models.DateField(null=True,blank=True,default=None) 
     is_notification_recieved=models.BooleanField(null=False,blank=True,default=False)
+    notify_to=models.ManyToManyField(Users,null=True,blank=True,default="",related_name='action_notify_to')
+    notify_type=models.CharField(max_length=150, null=True,blank=True,choices=choice.NOTIFY_TYPE)
+
+
+class TrackCases(models.Model):
+    action_status= models.CharField(blank=True, choices=choice.TRACK_TYPE, max_length=150, null=True)
+    action_description=models.CharField(max_length=250, null=True,blank=True)
+    action_date=models.DateField(null=True,blank=True,default=None) 
+    action_taken_by=models.ForeignKey(to=CaseStatus,null=True,blank=True,related_name='action_taken_by',on_delete=models.CASCADE)
+    case=models.ForeignKey(Case,null=True,blank=True,default="",related_name='case_track',on_delete=models.CASCADE)
