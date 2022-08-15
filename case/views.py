@@ -11,7 +11,8 @@ from rest_framework import filters
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.generics import GenericAPIView
 from django.core.mail import send_mail
-
+import os
+from twilio.rest import Client
 
 class CaseDetail(GenericAPIView):
     permission_classes = [IsAuthenticated]
@@ -27,8 +28,20 @@ class CaseDetail(GenericAPIView):
                 'New case added',
                 'vidhaan.inbox@gmail.com',
                 ['suryansh.1191@gmail.com', 'rahulkesharwani353@gmail.com', 'sonaljain067@gmail.com', 'dewansh.dt@gmail.com', 'emailanubhavagrawal@gmail.com', 'singh.20atulya@gmail.com']
-            )    
-            #
+            )
+
+            # seding phone 
+            account_sid = os.environ['TWILIO_ACCOUNT_SID']
+            auth_token = os.environ['TWILIO_AUTH_TOKEN']
+            client = Client(account_sid, auth_token)
+            # +19786629400
+            message = client.messages \
+                .create(
+                    body="There is an update in your. VIDHAAN SIH!",
+                    from_='+19786629400',
+                    to='+919179322789'
+                    )
+
             return Response({
                 "status_code": 200,
                 "data": serializer.data
@@ -78,6 +91,19 @@ class CaseDetail(GenericAPIView):
             
 class CaseList(ListAPIView):
     permission_classes = [IsAuthenticated]
+
+    #seding phone 
+    # account_sid = os.environ['TWILIO_ACCOUNT_SID']
+    # auth_token = os.environ['TWILIO_AUTH_TOKEN']
+    # client = Client(account_sid, auth_token)
+    # # +19786629400
+    # message = client.messages \
+    #         .create(
+    #              body="There is an update in your. VIDHAAN SIH!",
+    #              from_='+19786629400',
+    #              to=['+919179322789']
+    #             )
+
     # send_mail(
     #             'Case Update',
     #             'There is new update on the case',
