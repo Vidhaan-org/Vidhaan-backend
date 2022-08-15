@@ -66,6 +66,8 @@ cover/
 *.log
 local_settings.py
 db.sqlite3
+db.sqlite3
+db.sqlite3~e90cc8e5e3417a9c44f80173f5940ab8c1a45926
 db.sqlite3-journal
 media/
 

@@ -71,6 +71,8 @@ class Case(models.Model):
     order=models.ManyToManyField(Order,null=True,blank=True,default="",related_name='case_order')
     objection=models.ManyToManyField(Objection,null=True,blank=True,default="",related_name='case_objection')
     document=models.ManyToManyField(DocumentDetails,null=True,blank=True,default="",related_name='case_document')
+    status=models.ForeignKey(to=CaseStatus,null=True,blank=True,related_name='status',on_delete=models.CASCADE)
+    person_involved=models.ManyToManyField(PersonInvolved,null=True,blank=True,default="",related_name='person_involved')
 
     def petitioners(self):
         return ", ".join([str(p) for p in self.petitioner.all()])
