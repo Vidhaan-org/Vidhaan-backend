@@ -61,6 +61,7 @@ class Case(models.Model):
     filling_number=models.IntegerField(null=True)
     registration_number=models.IntegerField(null=True)
 
+    court=models.CharField(null=True,blank=True, max_length=50, choices=choice.COURT)
     stage_of_case=models.CharField(max_length=50, null=True, blank=True)
     coram=models.CharField(max_length=50, null=True, blank=True,default="")
     bench=models.CharField(max_length=50, null=True,blank=True,default="")
