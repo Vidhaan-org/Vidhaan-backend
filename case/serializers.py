@@ -32,7 +32,7 @@ class DocumentDetailsSerializer(serializers.ModelSerializer):
 class NotificationSerializer(serializers.ModelSerializer):
     class Meta:
         model=Notification
-        field='__all__'
+        fields='__all__'
 
 class CaseSerializer(serializers.ModelSerializer):
     petitioner=serializers.SerializerMethodField('get_petitioner')

@@ -52,41 +52,18 @@ class CaseDetail(GenericAPIView):
                 "data": serializer.errors
             })
     def get(self,request,id=None):
-        search_query = self.request.query_params.get('search_query') or None
-        filter_query=self.request.query_params.get('filter_query') or None
-
-        if not id:
-            try:
-                case=Case.objects.get(id=id)
-                serializer=CaseSerializer(case)
-                return Response({
-                    "status_code": 200,
-                    "data": serializer.data
-                })
-            except ObjectDoesNotExist:
-                return Response({
-                    "status_code": 400,
-                    "data": serializer.errors
-                })
-        # elif search_query :
-        #     queryset = queryset.filter(purchaser__username=search_query)
-        #     return queryset
-        elif filter_query: 
-            queryset = queryset.filter(purchaser__username=search_query)
-            return queryset
-        else: 
-            try:
-                cases=Case.objects.all()
-                serializer=CaseSerializer(cases,many=True)
-                return Response({
-                    "status_code": 200,
-                    "data": serializer.data
-                })
-            except ObjectDoesNotExist:
-                return Response({
-                    "status_code": 400,
-                    "data": serializer.errors
-                })
+        try:
+            cases=Case.objects.all()
+            serializer=CaseSerializer(cases,many=True)
+            return Response({
+                "status_code": 200,
+                "data": serializer.data
+            })
+        except ObjectDoesNotExist:
+            return Response({
+                "status_code": 400,
+                "data": serializer.errors
+            })
         
             
 class CaseList(ListAPIView):
@@ -131,7 +108,7 @@ class CaseNotification(ListAPIView):
 
     def get(self,request, id=None):
         try:
-            notification=Notification.objects.filter(id=id)
+            notification=Notification.objects.all()
             serializer=NotificationSerializer(notification, many=True)
             return Response({
                 "status_code": 200,
@@ -142,3 +119,17 @@ class CaseNotification(ListAPIView):
                     "status_code": 400,
                     "data": serializer.errors
                 })
+
+    def post(self,request):
+        serializer=NotificationSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({
+                "status_code": 200,
+                "data": serializer.data
+            })
+        else:
+            return Response({
+                "status_code": 400,
+                "data": serializer.errors
+            })
