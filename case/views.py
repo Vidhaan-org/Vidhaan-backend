@@ -89,7 +89,7 @@ class CaseList(ListAPIView):
     #         ) 
     serializer_class=CaseSerializer
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter]
-    filterset_fields = ['cnr_number', 'registration_number']
+    filterset_fields = ['cnr_number', 'registration_number', 'ia__filing_date', 'ia__ia_status' , 'court']
     ordering_fields = ['cnr_number']
     search_fields = ['cnr_number', 'registration_number']
 
