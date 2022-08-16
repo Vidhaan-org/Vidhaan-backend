@@ -1,3 +1,5 @@
+from dataclasses import field
+from pyexpat import model
 from rest_framework import serializers
 from .models import *
 from permuser.serializers import PetitionerSerializer,RespondentSerializer,ActSerializer,AdvocateSerializer
@@ -26,6 +28,11 @@ class DocumentDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model=DocumentDetails
         fields='__all__'
+
+class NotificationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Notification
+        field='__all__'
 
 class CaseSerializer(serializers.ModelSerializer):
     petitioner=serializers.SerializerMethodField('get_petitioner')

@@ -126,3 +126,19 @@ class CaseList(ListAPIView):
         else: 
             return queryset
 
+class CaseNotification(ListAPIView): 
+    permission_classes = [IsAuthenticated]
+
+    def get(self,request, id=None):
+        try:
+            notification=Notification.objects.filter(id=id)
+            serializer=NotificationSerializer(notification, many=True)
+            return Response({
+                "status_code": 200,
+                "data": serializer.data
+            })
+        except ObjectDoesNotExist:
+                return Response({
+                    "status_code": 400,
+                    "data": serializer.errors
+                })
