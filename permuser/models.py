@@ -6,6 +6,9 @@ class UserPermission(models.Model):
     can_edit=models.BooleanField(default=False)
     can_upload=models.BooleanField(default=False)
 
+    def __str__(self):
+        return "%s" %(self.name)
+
 class EmployeeModel(models.Model):
     organization_permission=models.ForeignKey(to=UserPermission, on_delete=models.CASCADE,null=True,blank=True,related_name='employee_permission')
     employee_name=models.TextField(max_length=50,null=True,blank=True)
@@ -13,6 +16,9 @@ class EmployeeModel(models.Model):
     employee_mobile=models.CharField(max_length=200,unique=True)
     employee_password=models.CharField(max_length=200,unique=True)
     permissions=models.ManyToManyField(to=UserPermission,related_name='user_permission',blank=True)
+
+    def __str__(self):
+        return "%s" %(self.employee_name)
 
 class Advocate(models.Model):
     advocate_name = models.CharField(null=True,blank=True, max_length=50)
@@ -22,6 +28,9 @@ class Advocate(models.Model):
     advocate_email_id = models.CharField(null=True,blank=True, max_length=50)
     advocate_type=models.CharField(null=True,blank=True, max_length=50,choices=choice.ADVOCATE_TYPE)
 
+    def __str__(self):
+        return "%s" %(self.advocate_name)
+
 class Judge(models.Model):
     judge_name = models.CharField(null=True,blank=True, max_length=50)
     judge_number = models.IntegerField(null=True,blank=True)
@@ -29,6 +38,8 @@ class Judge(models.Model):
     judge_mobile = models.IntegerField(null=True,blank=True)
     judge_email_id = models.CharField(null=True,blank=True, max_length=50)
 
+    def __str__(self):
+        return "%s" %(self.judge_name)
 
 class Act(models.Model):
     act_title=models.CharField(null=True,blank=True, max_length=150)
@@ -67,8 +78,8 @@ class Respondent(models.Model):
     respondent_gender = models.CharField(null=True,blank=True, max_length=50)
     respondent_address = models.TextField(null=True,blank=True, max_length= 200)
     respondent_country = models.CharField(null=True,blank=True, max_length=50)
-    petitioner_city = models.CharField(null=True,blank=True, max_length=50)
-    petitioner_email = models.CharField(null=True,blank=True, max_length=50)
+    respondent_city = models.CharField(null=True,blank=True, max_length=50)
+    respondent_email = models.CharField(null=True,blank=True, max_length=50)
 
     def __str__(self):
         return "%s" %(self.respondent_name)

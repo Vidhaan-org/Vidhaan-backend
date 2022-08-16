@@ -12,10 +12,16 @@ class IADetails(models.Model):
     next_date=models.DateField(null=True,blank=True,default=0)
     ia_status=models.CharField(null=True,blank=True, max_length=50,choices=choice.IA_STATUS,default="")
 
+    def __str__(self):
+        return "%s" %(self.ia_number)
+
 class Order(models.Model): 
     # id=order no (for now)
     judge=models.ForeignKey(to=Judge,null=True,blank=True,default="",on_delete=models.CASCADE)
     order_date=models.DateField(null=True,blank=True,default=0)
+
+    def __str__(self):
+        return "%s %s" %(self.id, self.order_date)
 
 
 class Objection(models.Model):
@@ -23,6 +29,9 @@ class Objection(models.Model):
     objection=models.CharField(max_length=500, null=True,blank=True)
     compliance_date=models.DateField(null=True,blank=True,default=0)
     reciept_date=models.DateField(null=True,blank=True,default=0)
+
+    def __str__(self):
+        return "%s" %(self.objection)
 
 
 class DocumentDetails(models.Model):
@@ -33,11 +42,17 @@ class DocumentDetails(models.Model):
     document=models.FileField(upload_to="document/",null=True, blank=True)
     document_type=models.CharField(max_length=50, null=True,blank=True)
 
+    def __str__(self):
+        return "%s %s" %(self.document_no, self.document_type)
+
 class History(models.Model):
     cause_list_type=models.CharField(max_length=50, null=True,blank=True)
     judge=models.ForeignKey(to=Judge,null=True,blank=True,default="",on_delete=models.CASCADE)
     hearing_date=models.DateField(null=True,blank=True,default=0)
     purpose_of_hearing=models.CharField(null=True,blank=True, max_length=50,choices=choice.PURPOSE_OF_HEARING,default="")
+
+    def __str__(self):
+        return "%s" %(self.cause_list_type)
 
 
 class Case(models.Model):
@@ -91,6 +106,8 @@ class Notification(models.Model):
     notify_to=models.ManyToManyField(Users,null=True,blank=True,default="",related_name='action_notify_to')
     notify_type=models.CharField(max_length=150, null=True,blank=True,choices=choice.NOTIFY_TYPE)
 
+    def __str__(self):
+        return "%s" %(self.notify_type)
 
 class TrackCases(models.Model):
     action_status= models.CharField(blank=True, choices=choice.TRACK_TYPE, max_length=150, null=True)
@@ -98,3 +115,6 @@ class TrackCases(models.Model):
     action_date=models.DateField(null=True,blank=True,default=None) 
     action_taken_by=models.ForeignKey(to=Users,null=True,blank=True,related_name='action_taken_by',on_delete=models.CASCADE)
     case=models.ForeignKey(Case,null=True,blank=True,default="",related_name='case_track',on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "%s %s" %(self.action_status,self.action_taken_by)

@@ -8,8 +8,12 @@ admin.site.register(UserPermission)
 admin.site.register(EmployeeModel)
 
 class PetitionerAdmin(admin.ModelAdmin):
-    list_display=['petitioner_name']
+    list_display=['id','petitioner_name','petitioner_age','petitioner_state']
 admin.site.register(Petitioner,PetitionerAdmin)
-admin.site.register(Respondent)
+
+class RespondentAdmin(admin.ModelAdmin):
+    list_display=['id','respondent_name','respondent_relation','respondent_address']
+admin.site.register(Respondent,RespondentAdmin)
+
 admin.site.register(Act)
 admin.site.register(Advocate)

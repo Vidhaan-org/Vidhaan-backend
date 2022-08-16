@@ -12,3 +12,5 @@ admin.site.register(Objection)
 admin.site.register(DocumentDetails)
 admin.site.register(Notification)
 admin.site.register(TrackCases)
+
+admin.site.register(PersonInvolved)
