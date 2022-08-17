@@ -1,3 +1,4 @@
+from ast import If
 from dataclasses import field, fields
 from pyexpat import model
 import graphene
@@ -9,9 +10,17 @@ from permuser.models import *
 class CaseType(DjangoObjectType):
     class Meta:
         model = Case
-        fields = ('id','case_type', 'history','cnr_number',
-        'filling_number', 'case_status', 'court', 'petitioner', 'state_of_case','district','judicial','causelist_name','latest_hearing','decision_date','case_status','next_date','state_of_case','district','judicial','causelist_name','latest_hearing','decision_date','case_status','next_date')
+        fields = '__all__'
 
+class LawerType(DjangoObjectType):
+    class Meta:
+        model = Advocate
+        fields = ('advocate_name', 'advocate_number')
+
+class JudgeType(DjangoObjectType):
+    class Meta:
+        model = Judge
+        fields = ('judge_name', 'judge_number')
 class PetitionerType(DjangoObjectType):
     class Meta:
         model = Petitioner
@@ -20,8 +29,12 @@ class PetitionerType(DjangoObjectType):
 class PetitionsList(DjangoObjectType):
     class Meta:
         model = Petition
-        fields = ('id','petition_file_date'
-        )
+        fields = '__all__'
+
+class ActType(DjangoObjectType):
+    class Meta:
+        model = Act
+        fields = '__all__'
 
 class TrackCaseList(DjangoObjectType):
     class Meta:
@@ -35,7 +48,43 @@ class Query(graphene.ObjectType):
     casesTrackDetails = graphene.List(TrackCaseList)
     petitionFile = graphene.List(PetitionsList)
     petioner = graphene.List(PetitionerType)
+    lawers = graphene.List(LawerType)
+    judge = graphene.List(JudgeType)
+    act = graphene.List(ActType)
 
+    @graphene.resolve_only_args
+    def resolve_act(self):
+        if not self:
+            return Act.objects.all() 
+        else:
+            return self.act.all()
+
+
+
+
+    @graphene.resolve_only_args
+    def resolve_petioner(self):
+        print(self)
+        if not self:
+            return Petitioner.objects.all()
+        else:
+            return self.petioner.all()
+    
+    @graphene.resolve_only_args
+    def resolve_judge(self):
+        print(self)
+        if not self:
+            return Judge.objects.all()
+        else:
+            return self.judge.all()
+    
+    @graphene.resolve_only_args
+    def resolve_lawer(self):
+        # Querying a list
+        if not self:
+            return Judge.objects.all()
+        else:
+            return self.lawers.all()
         
     def resolve_cases(root, info, **kwargs):
         # Querying a list
@@ -49,9 +98,9 @@ class Query(graphene.ObjectType):
         # Querying a list
         return Petition.objects.all()
 
-    def resolve_pationer(root, info, **kwargs):
-        # Querying a list
-        return Petitioner.objects.select_related("case_petitioner").all()
+    # def resolve_petioner(root, info, **kwargs):
+    #     # Querying a list
+    #     return Petitioner.objects.all()
 
 
 schema = graphene.Schema(query=Query)

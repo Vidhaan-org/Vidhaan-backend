@@ -40,7 +40,7 @@ class CaseSerializer(serializers.ModelSerializer):
     document=serializers.SerializerMethodField('get_document')
     class Meta:
         model=Case
-        fields=["cnr_number", "case_type","filling_number","registration_number","petitioner","respondent","act","advocate","ia","history","order","objection","document"]
+        fields=["id","cnr_number", "case_type","filling_number","registration_number","petitioner","respondent","act","advocate","ia","history","order","objection","document"]
 
     def get_petitioner(self,instance):
         return PetitionerSerializer(instance.petitioner,many=True).data
