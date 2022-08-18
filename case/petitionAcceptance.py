@@ -14,8 +14,8 @@ def petition_acceptance_metric(text_inp):
     import pickle
     import pandas as pd
 
-    model_path = '.\\Ridgeclassifier.joblib'
-    vectorizer_path = '.\\vectorizer.pickle'
+    model_path = 'Ridgeclassifier.joblib'
+    vectorizer_path = 'vectorizer.pickle'
     
     text_inp = pd.DataFrame(text_inp,columns=['text'])
     
