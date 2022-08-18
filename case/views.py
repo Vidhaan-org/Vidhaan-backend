@@ -133,3 +133,86 @@ class CaseNotification(ListAPIView):
                 "status_code": 400,
                 "data": serializer.errors
             })
+
+class OptionList(ListAPIView):
+    def get(self,request):
+        list_of_choices=[]
+        court_list=[]
+        act_list=[]
+        advocate_list=[]
+        case_type_list=[]
+        petiton_type_list=[]
+        case_category_list=[]
+        case_status_list=[]
+        special_category_list=[]
+        notify_type_list=[]
+        track_type_list=[]
+        purpose_hearing_list=[]
+        ia_details_list=[]
+
+        for court in choice.COURT:
+            court_caps, court_title=court
+            court_list.append(court_title)
+        
+        for act in choice.ACT_BELONG_TO:
+            act_caps, act_title=act
+            act_list.append(act_title)
+        
+        for advocate in choice.ADVOCATE_TYPE:
+            advocate_caps, advocate_title=advocate
+            advocate_list.append(advocate_title)
+
+        for case_type in choice.CASE_TYPE:
+            case_type_caps, case_type_title=case_type
+            case_type_list.append(case_type_title)
+        
+        for petiton_type in choice.PETITION_TYPE:
+            petiton_type_caps, petiton_type_title=petiton_type
+            petiton_type_list.append(petiton_type_title)
+
+        for case_category in choice.CASE_CATEGORY:
+            case_category_caps, case_category_title=case_category
+            case_category_list.append(case_category_title)
+        
+        for case_status in choice.CASE_STATUS:
+            case_status_caps, case_status_title=case_status
+            case_status_list.append(case_status_title)
+        
+        for special_category in choice.SPECIAL_CATEGORY:
+            special_category_caps, special_category_title=special_category
+            special_category_list.append(special_category_title)
+
+        for notify_type in choice.NOTIFY_TYPE:
+            notify_type_caps, notify_type_title=notify_type
+            notify_type_list.append(notify_type_title)
+        
+        for track_type in choice.TRACK_TYPE:
+            track_type_caps, track_type_title=track_type
+            track_type_list.append(track_type_title)
+
+        for purpose_hearing in choice.PURPOSE_OF_HEARING:
+            purpose_hearing_caps, purpose_hearing_title=purpose_hearing
+            purpose_hearing_list.append(purpose_hearing_title)
+
+        for ia_details in choice.IA_STATUS:
+            ia_details_caps, ia_details_title=ia_details
+            ia_details_list.append(ia_details_title)
+
+        
+
+        list_of_choices.append({"Court": court_list})
+        list_of_choices.append({"Act Belong to": act_list})
+        list_of_choices.append({"Advocate Type": advocate_list})
+        list_of_choices.append({"Case Type": case_type_list})
+        list_of_choices.append({"Petition Type": petiton_type_list})
+        list_of_choices.append({"Case Category": case_category_list})
+        list_of_choices.append({"Case Status": case_status_list})
+        list_of_choices.append({"Special Category": special_category_list})
+        list_of_choices.append({"Notify Type": notify_type_list})
+        list_of_choices.append({"Track Type": track_type_list})
+        list_of_choices.append({"Purpose of Hearing": purpose_hearing_list})
+        list_of_choices.append({"IA Status": ia_details_list})
+        return Response({
+            "status_code": 200,
+            "data": list_of_choices
+        }) 
