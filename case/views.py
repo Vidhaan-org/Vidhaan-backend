@@ -13,6 +13,7 @@ from rest_framework.generics import GenericAPIView
 from django.core.mail import send_mail
 import os
 from twilio.rest import Client
+from case.petitionAcceptance import petition_acceptance_metric
 
 class CaseDetail(GenericAPIView):
     permission_classes = [IsAuthenticated]
@@ -250,3 +251,17 @@ class TrackCasesList(ListAPIView):
                 "status_code": 400,
                 "data": serializer.errors
             })
+
+
+class PetitionAcceptance(APIView):
+    def post(self,request):
+        text=request.data['text']
+        acceptance_bool, acceptance_pred=petition_acceptance_metric(text_inp=[text])
+        
+        return Response({
+            "status_code": 200,
+            "data": {
+                "bool": str(acceptance_bool)[1],
+                "pred": str(acceptance_pred)[1:-1]
+            }
+        })
