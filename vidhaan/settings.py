@@ -31,6 +31,16 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+# CORS_ALLOWED_ORIGINS = [
+#     "https://example.com",
+#     "https://sub.example.com",
+#     "http://localhost:8080",
+#     "http://127.0.0.1:9000",
+#     '*'
+# ]
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+
 
 # Application definition
 SECRET_KEY="4335956fc5ec4f96djsk5b29414b067d8ff4b"
