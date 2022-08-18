@@ -74,3 +74,9 @@ class CaseSerializer(serializers.ModelSerializer):
 
     def get_document(self,instance):
         return DocumentDetailsSerializer(instance.document,many=True).data
+
+
+class TrackCasesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=TrackCases
+        fields='__all__'

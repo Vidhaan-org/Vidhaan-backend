@@ -8,5 +8,6 @@ urlpatterns=[
     path('details/',CaseDetail.as_view()),
     path('',CaseList.as_view()),
     path('notification/', CaseNotification.as_view()),
-    path('option_list/',OptionList.as_view())
+    path('option_list/',OptionList.as_view()),
+    path('track_cases/',TrackCasesList.as_view())
 ]

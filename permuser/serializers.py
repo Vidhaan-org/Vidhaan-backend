@@ -1,4 +1,6 @@
 from rest_framework import serializers
+
+from case.models import TrackCases
 from .models import *
 
 class PetitionerSerializer(serializers.ModelSerializer):
@@ -18,11 +20,6 @@ class AdvocateSerializer(serializers.ModelSerializer):
         model=Advocate
         fields='__all__'
 
-
-class ActSerializer(serializers.ModelSerializer):
-    class Meta:
-        model=Act
-        fields='__all__'
 
 class ActSerializer(serializers.ModelSerializer):
     class Meta:

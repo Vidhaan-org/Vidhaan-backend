@@ -16,6 +16,8 @@ from twilio.rest import Client
 
 class CaseDetail(GenericAPIView):
     permission_classes = [IsAuthenticated]
+    serializer_class=CaseSerializer
+
     def post(self,request):
         serializer=CaseSerializer(data=request.data)
         if serializer.is_valid():
@@ -105,7 +107,7 @@ class CaseList(ListAPIView):
 
 class CaseNotification(ListAPIView): 
     permission_classes = [IsAuthenticated]
-
+    serializer_class=NotificationSerializer
     def get(self,request, id=None):
         try:
             notification=Notification.objects.all()
@@ -216,3 +218,36 @@ class OptionList(ListAPIView):
             "status_code": 200,
             "data": list_of_choices
         }) 
+
+
+class TrackCasesList(ListAPIView): 
+    permission_classes = [IsAuthenticated]
+    serializer_class=TrackCasesSerializer
+
+    def get(self,request, id=None):
+        try:
+            track_cases=TrackCases.objects.all()
+            serializer=TrackCasesSerializer(track_cases, many=True)
+            return Response({
+                "status_code": 200,
+                "data": serializer.data
+            })
+        except ObjectDoesNotExist:
+                return Response({
+                    "status_code": 400,
+                    "data": serializer.errors
+                })
+
+    def post(self,request):
+        serializer=TrackCasesSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({
+                "status_code": 200,
+                "data": serializer.data
+            })
+        else:
+            return Response({
+                "status_code": 400,
+                "data": serializer.errors
+            })
