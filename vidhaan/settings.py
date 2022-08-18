@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+from pickle import APPEND
 import django_heroku
 import dj_database_url
 from datetime import timedelta
@@ -41,7 +42,7 @@ ALLOWED_HOSTS = ['*']
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
-
+APPEND_SLASH = False
 # Application definition
 SECRET_KEY="4335956fc5ec4f96djsk5b29414b067d8ff4b"
 INSTALLED_APPS = [
