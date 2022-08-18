@@ -138,7 +138,6 @@ class CaseNotification(ListAPIView):
 
 class OptionList(ListAPIView):
     def get(self,request):
-        list_of_choices=[]
         court_list=[]
         act_list=[]
         advocate_list=[]
@@ -200,23 +199,23 @@ class OptionList(ListAPIView):
             ia_details_caps, ia_details_title=ia_details
             ia_details_list.append(ia_details_title)
 
-        
-
-        list_of_choices.append({"Court": court_list})
-        list_of_choices.append({"Act Belong to": act_list})
-        list_of_choices.append({"Advocate Type": advocate_list})
-        list_of_choices.append({"Case Type": case_type_list})
-        list_of_choices.append({"Petition Type": petiton_type_list})
-        list_of_choices.append({"Case Category": case_category_list})
-        list_of_choices.append({"Case Status": case_status_list})
-        list_of_choices.append({"Special Category": special_category_list})
-        list_of_choices.append({"Notify Type": notify_type_list})
-        list_of_choices.append({"Track Type": track_type_list})
-        list_of_choices.append({"Purpose of Hearing": purpose_hearing_list})
-        list_of_choices.append({"IA Status": ia_details_list})
         return Response({
             "status_code": 200,
-            "data": list_of_choices
+            "data": {
+                "Court": court_list,
+                "Act Belong to": act_list,
+                "Advocate Type": advocate_list,
+                "Case Type": case_type_list,
+                "Petition Type": petiton_type_list,
+                "Case Category": case_category_list,
+                "Case Status": case_status_list,
+                "Special Category": special_category_list,
+                "Notify Type": notify_type_list,
+                "Track Type": track_type_list,
+                "Purpose of Hearing": purpose_hearing_list,
+                "IA Status": ia_details_list
+
+            }
         }) 
 
 
