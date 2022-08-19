@@ -14,6 +14,7 @@ from django.core.mail import send_mail
 import os
 from twilio.rest import Client
 from case.petitionAcceptance import petition_acceptance_metric
+from datetime import date
 
 class CaseDetail(GenericAPIView):
     permission_classes = [IsAuthenticated]
@@ -265,3 +266,37 @@ class PetitionAcceptance(APIView):
                 "pred": str(acceptance_pred)[1:-1]
             }
         })
+
+class DateMonitoring(ListAPIView): 
+    permission_classes = [IsAuthenticated]
+    serializer_class=NotificationSerializer
+    def get(self,request, id=None):
+        caseNumber = self.request.query_params.get('case')
+        if caseNumber is not None:
+            print("not non")
+            try:
+                notification=Notification.objects.filter(action_date__gte=date.today(), case__cnr_number=caseNumber)
+                serializer=NotificationSerializer(notification, many=True)
+                return Response({
+                    "status_code": 200,
+                    "data": serializer.data
+                })  
+            except ObjectDoesNotExist:
+                return Response({
+                    "status_code": 400,
+                    "data": serializer.errors
+                })
+        else:
+            print("is non")
+            try:
+                notification=Notification.objects.filter(action_date__gte=date.today())
+                serializer=NotificationSerializer(notification, many=True)
+                return Response({
+                    "status_code": 200,
+                    "data": serializer.data
+                })
+            except ObjectDoesNotExist:
+                    return Response({
+                        "status_code": 400,
+                        "data": serializer.errors
+                    })
