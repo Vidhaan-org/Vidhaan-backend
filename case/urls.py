@@ -11,5 +11,6 @@ urlpatterns=[
     path('option_list/',OptionList.as_view()),
     path('track_cases/',TrackCasesList.as_view()),
     path('petition_acceptance/',PetitionAcceptance.as_view()),
-    path('dateMonitoring/', DateMonitoring.as_view())
+    path('dateMonitoring/', DateMonitoring.as_view()),
+    # path('person_involved/',)
 ]

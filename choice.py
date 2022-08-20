@@ -134,8 +134,8 @@ CASE_CATEGORY=[
 ]
 
 CASE_STATUS = (
-    ('PENDING', 'Pending'),
-    ('DISPOSED', 'Disposed')
+    ('Pending', 'Pending'),
+    ('Disposed', 'Disposed')
 )
 SPECIAL_CATEGORY=[
     ('SENIOR_CITIZEN_GT_65','SENIOR_CITIZEN_GT_65'),

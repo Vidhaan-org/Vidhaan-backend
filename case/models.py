@@ -106,6 +106,7 @@ class Notification(models.Model):
     is_notification_recieved=models.BooleanField(null=False,blank=True,default=False)
     notify_to=models.ManyToManyField(Users,null=True,blank=True,default="",related_name='action_notify_to')
     notify_type=models.CharField(max_length=150, null=True,blank=True,choices=choice.NOTIFY_TYPE)
+    action_location=models.CharField(max_length=150, null=True,blank=True)
 
     def __str__(self):
         return "%s" %(self.notify_type)

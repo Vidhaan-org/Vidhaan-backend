@@ -2,13 +2,10 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from .models import *
 
-from email import message
-from typing import List
 from .serializers import *
 from .models import *
 from django_filters.rest_framework import *
 from django.core.mail import send_mail
-import os
 from twilio.rest import Client
 
 auth_token="b7c11faeae60069df62e956c034e1713"
