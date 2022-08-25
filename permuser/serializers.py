@@ -25,3 +25,13 @@ class ActSerializer(serializers.ModelSerializer):
     class Meta:
         model=Act
         fields='__all__'
+
+class CustomUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=CustomUser
+        fields=["id","username","first_name","last_name","user_type","tab_permission"]
+
+class CustomUserPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=CustomUser
+        fields=["name","email_address","username","password","user_type","tab_permission",]

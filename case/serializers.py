@@ -44,6 +44,7 @@ class CaseSerializer(serializers.ModelSerializer):
     order=serializers.SerializerMethodField('get_order')
     objection=serializers.SerializerMethodField('get_objection')
     document=serializers.SerializerMethodField('get_document')
+    cnr_number=serializers.SerializerMethodField('get_cnrno')
     class Meta:
         model=Case
         fields=["id","cnr_number", "case_type","filling_number","registration_number","petitioner","respondent","act","advocate","ia","history","order","objection","document"]
@@ -74,6 +75,9 @@ class CaseSerializer(serializers.ModelSerializer):
 
     def get_document(self,instance):
         return DocumentDetailsSerializer(instance.document,many=True).data
+    
+    def get_cnrno(self,instance): 
+        return str(instance.cnr_number)
 
 
 class TrackCasesSerializer(serializers.ModelSerializer):

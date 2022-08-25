@@ -40,7 +40,7 @@ class TabPermission(models.Model):
 
 class Advocate(models.Model):
     advocate_name = models.CharField(null=True,blank=True, max_length=50)
-    advocate_number = models.IntegerField(null=True,blank=True)
+    # advocate_number = models.IntegerField(null=True,blank=True)
     advocate_year = models.IntegerField(null=True,blank=True)
     advocate_mobile = models.IntegerField(null=True,blank=True)
     advocate_email_id = models.CharField(null=True,blank=True, max_length=50)
@@ -135,5 +135,6 @@ class UGCExecutive(models.Model):
 class CustomUser(AbstractUser):  
     user_type = models.CharField(null=True,blank=True,choices=choice.ACCOUNT_TYPE_CHOICES,default="",max_length=50)
     tab_permission = models.ManyToManyField(to=TabPermission,related_name='user_permission',blank=True,default="")
-
+    name=models.CharField(null=True,blank=True,default="",max_length=50)
+    expertise=models.ManyToManyField(Tags,null=True,blank=True)
     

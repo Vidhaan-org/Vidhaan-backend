@@ -51,4 +51,5 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('swagger', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('graphql', csrf_exempt(GraphQLView.as_view(graphiql =True, schema=schema))),
+    path('user/',include('permuser.urls')),
 ]

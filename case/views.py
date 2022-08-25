@@ -35,16 +35,16 @@ class CaseDetail(GenericAPIView):
             )
 
             # seding phone 
-            account_sid = os.environ['TWILIO_ACCOUNT_SID']
-            auth_token = os.environ['TWILIO_AUTH_TOKEN']
-            client = Client(account_sid, auth_token)
-            +19786629400
-            message = client.messages \
-                .create(
-                    body="There is an update in your. VIDHAAN SIH!",
-                    from_='+19786629400',
-                    to='+919179322789'
-                    )
+            # account_sid = os.environ['TWILIO_ACCOUNT_SID']
+            # auth_token = os.environ['TWILIO_AUTH_TOKEN']
+            # client = Client(account_sid, auth_token)
+            # +19786629400
+            # message = client.messages \
+            #     .create(
+            #         body="There is an update in your. VIDHAAN SIH!",
+            #         from_='+19786629400',
+            #         to='+919179322789'
+            #         )
 
             return Response({
                 "status_code": 200,

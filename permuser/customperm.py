@@ -21,7 +21,9 @@ class CustomAuthentication(BaseAuthentication):
                 "status_code": 404,
                 "data": "User doesn't exist!!"
             })
-        return (user,None)
+        return (user,{
+            "user": user.id
+        })
 
 
 class AdminPermission(BasePermission):
