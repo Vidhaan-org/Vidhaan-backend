@@ -1,11 +1,13 @@
 from django.contrib import admin
 from .models import *
+from django.contrib.auth.admin import UserAdmin
 
 
 # Register your models here.
 
-admin.site.register(UserPermission)
-admin.site.register(EmployeeModel)
+admin.site.register(TabPermission)
+# admin.site.register(EmployeeModel)
+admin.site.register(CustomUser)
 
 class PetitionerAdmin(admin.ModelAdmin):
     list_display=['id','petitioner_name','petitioner_age','petitioner_state']

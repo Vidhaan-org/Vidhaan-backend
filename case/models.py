@@ -86,6 +86,7 @@ class Case(models.Model):
     objection=models.ManyToManyField(Objection,null=True,blank=True,default="",related_name='case_objection')
     document=models.ManyToManyField(DocumentDetails,null=True,blank=True,default="",related_name='case_document')
     person_involved=models.ManyToManyField(PersonInvolved,null=True,blank=True,default="",related_name='person_involved')
+    ugc_executive=models.ManyToManyField(UGCExecutive,null=True,blank=True,default="",related_name='ugc_executive')
 
 
     def petitioners(self):

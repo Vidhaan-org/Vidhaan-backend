@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from permuser.models import Petitioner, Respondent, Act
+from permuser.models import *
 import choice
 
 Users=get_user_model()

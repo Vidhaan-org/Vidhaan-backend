@@ -115,6 +115,7 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
+AUTH_USER_MODEL='permuser.CustomUser'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -193,3 +194,4 @@ EMAIL_HOST_PASSWORD = 'akbctlbfyeepyswm'
 EMAIL_USE_TLS = True
 
 django_heroku.settings(locals())
+

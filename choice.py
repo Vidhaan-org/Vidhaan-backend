@@ -159,3 +159,8 @@ TRACK_TYPE=[
     ('Case Dates Updated', 'Case Dates Updated'), 
     ('Doc Updated', 'Doc Updated')
 ]
+ACCOUNT_TYPE_CHOICES=[
+    ('Super Admin','Super Admin'),
+    ('Advocate','Advocate'),
+    ('UGC Executive','UGC Executive')
+]
