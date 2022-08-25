@@ -6,8 +6,8 @@ from django.contrib.auth.admin import UserAdmin
 # Register your models here.
 
 admin.site.register(TabPermission)
-# admin.site.register(EmployeeModel)
 admin.site.register(CustomUser)
+# admin.site.register(EmployeeModel)
 
 class PetitionerAdmin(admin.ModelAdmin):
     list_display=['id','petitioner_name','petitioner_age','petitioner_state']
