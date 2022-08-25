@@ -56,9 +56,9 @@ class History(models.Model):
 
 
 class Case(models.Model):
-    cnr_number=models.IntegerField(unique=True, null=True)
+    cnr_number=models.CharField(max_length=20, unique=True, null=True)
     case_type=models.CharField(max_length=50, null=True,blank=True,choices=choice.CASE_TYPE)
-    filling_number=models.IntegerField(null=True)
+    filling_number=models.CharField(max_length=20, unique=True, null=True)
     registration_number=models.IntegerField(null=True)
 
     court=models.CharField(null=True,blank=True, max_length=50, choices=choice.COURT)
