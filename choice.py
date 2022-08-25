@@ -14,6 +14,16 @@ ADVOCATE_TYPE=[
     ('RESPONDENT_ADVOCATE','Respondent Advocate')
 ]
 CASE_TYPE=[
+    ('Arbitration Petition','Arbitration Petition'),
+    ('Civil (Appeal) Petition','Civil (Appeal) Petition'), 
+    ('Contempt Petition (Civil)','Contempt Petition (Civil)'),
+    ('Contempt Petition (Criminal)','Contempt Petition (Criminal)'), 
+    ('Criminal Appeal Petition','Criminal Appeal Petition'), 
+    ('Election Petition','Election Petition'), 
+    ('Original Suit','Original Suit'), 
+    ('Petition for Special Leave to Appeal','Petition for Special Leave to Appeal'), 
+    ('Transferred Case Petition','Transferred Case Petition'), 
+    ('Writ Petition','Writ Petition'),
     ('ARBITRATION Original Petition','ARBITRATION Original Petition'),
     ('APPEAL SUIT','APPEAL SUIT'),
     ('ANDHRA TENANCY APPEAL','ANDHRA TENANCY APPEAL'),
@@ -86,16 +96,6 @@ PETITION_TYPE=[
     ('Curative Petition','Curative Petition')
 ]
 CASE_CATEGORY=[
-    ('Arbitration Petition','Arbitration Petition'),
-    ('Civil (Appeal) Petition','Civil (Appeal) Petition'), 
-    ('Contempt Petition (Civil)','Contempt Petition (Civil)'),
-    ('Contempt Petition (Criminal)','Contempt Petition (Criminal)'), 
-    ('Criminal Appeal Petition','Criminal Appeal Petition'), 
-    ('Election Petition','Election Petition'), 
-    ('Original Suit','Original Suit'), 
-    ('Petition for Special Leave to Appeal','Petition for Special Leave to Appeal'), 
-    ('Transferred Case Petition','Transferred Case Petition'), 
-    ('Writ Petition','Writ Petition'),
     ('Labour Matters','Labour Matters'),
     ('Rent Act Matters','Rent Act Matters'),
     ('Direct Taxes Matter','Direct Taxes Matter'),

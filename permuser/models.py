@@ -33,10 +33,15 @@ class Tags(models.Model):
     name = models.CharField(max_length=50, unique=True)
     # created_by = models.ForeignKey(Users, on_delete=models.CASCADE, related_name="created_tags")
 
+    def __str__(self):
+        return self.name
+
 class TabPermission(models.Model):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
     name = models.CharField(max_length=50, unique=True)
 
+    def __str__(self):
+        return self.name
 
 class Advocate(models.Model):
     advocate_name = models.CharField(null=True,blank=True, max_length=50)

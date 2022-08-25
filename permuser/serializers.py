@@ -31,7 +31,14 @@ class CustomUserSerializer(serializers.ModelSerializer):
         model=CustomUser
         fields=["id","username","first_name","last_name","user_type","tab_permission"]
 
+
 class CustomUserPostSerializer(serializers.ModelSerializer):
     class Meta:
         model=CustomUser
-        fields=["name","email_address","username","password","user_type","tab_permission",]
+        fields=["name","email_address","username","password","user_type","tab_permission"]
+
+
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Tags
+        fields='__all__'
