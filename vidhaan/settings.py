@@ -192,4 +192,6 @@ EMAIL_HOST_USER = 'vidhaan.inbox@gmail.com'
 EMAIL_HOST_PASSWORD = 'akbctlbfyeepyswm'
 EMAIL_USE_TLS = True
 
+AUTH_USER_MODEL = 'permuser.User'
+
 django_heroku.settings(locals())

@@ -17,3 +17,4 @@ admin.site.register(Respondent,RespondentAdmin)
 
 admin.site.register(Act)
 admin.site.register(Advocate)
+admin.site.register(User)
