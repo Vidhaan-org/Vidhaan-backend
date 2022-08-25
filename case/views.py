@@ -14,7 +14,7 @@ from django.core.mail import send_mail
 import os
 from twilio.rest import Client
 from case.petitionAcceptance import petition_acceptance_metric
-from datetime import date
+from datetime import date,datetime
 
 class CaseDetail(GenericAPIView):
     # permission_classes = [IsAuthenticated]
@@ -99,7 +99,7 @@ class CaseList(ListAPIView):
             return queryset
 
 class CaseNotification(ListAPIView): 
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     serializer_class=NotificationSerializer
     def get(self,request,id=None):
         try:
@@ -291,3 +291,53 @@ class DateMonitoring(ListAPIView):
                         "status_code": 400,
                         "data": serializer.errors
                     })
+
+class sendPersonInvolvedNotification(APIView):
+    def post(self,request):
+        # get case_type, user (extract email from user)
+        case_det=request.data
+        user_id=request.data['notify_to_user']
+        case_id=request.data['case_id']
+        petitioner=[]
+        respondent=[]
+        try: 
+            person_email=PersonInvolved.objects.get(id=user_id).person_email
+        except ObjectDoesNotExist:
+            return Response({
+                "status_code": 400,
+                "data": "Person Involved Not Found!!"
+            })
+
+        try:
+            case=Case.objects.get(id=case_id)
+            pass 
+        except ObjectDoesNotExist:
+            return Response({
+                "status_code": 400,
+                "data": "Case Not Found!!"
+            })
+        
+        send_mail(
+            f"{case_det['case_type']}",
+            f"There is {case_det['case_type']} on the case. Visit the website to get more info about it!",
+            'vidhaan.inbox@gmail.com',
+            [f"{person_email}"]
+        ) 
+        print()
+        # if case.petitioner:
+        #     for pet in case.petitioner:
+        #         petitioner.append(pet.petitioner_name)
+        #         print(pet.petitioner_name)
+        
+        # if case.respondent:
+        #     for res in case.respondent: 
+        #         respondent.append(res.respondent_name)
+        #         print(res.respondent_name)
+
+        # Notification.objects.create(case=case_det,case_title="",
+        # notification_date=datetime.now(),notify_type=case_det['case_type'],action_date=case_det['action_date'],action_location=case_det['action_location'])
+
+        return Response({
+            "status_code":"200",
+            "data":"Mail sent successfully!!"
+        })

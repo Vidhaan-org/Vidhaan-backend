@@ -12,5 +12,5 @@ urlpatterns=[
     path('track_cases/',TrackCasesList.as_view()),
     path('petition_acceptance/',PetitionAcceptance.as_view()),
     path('dateMonitoring/', DateMonitoring.as_view()),
-    # path('person_involved/',)
+    path('send_notification_pi/',sendPersonInvolvedNotification.as_view())
 ]

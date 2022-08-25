@@ -3,7 +3,7 @@ from pyexpat import model
 from rest_framework import serializers
 from .models import *
 from permuser.serializers import PetitionerSerializer,RespondentSerializer,ActSerializer,AdvocateSerializer
-
+import datetime
 class IADetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model=IADetails
@@ -30,10 +30,25 @@ class DocumentDetailsSerializer(serializers.ModelSerializer):
         fields='__all__'
 
 class NotificationSerializer(serializers.ModelSerializer):
+    case=serializers.SerializerMethodField('get_case')
+    notification_date=serializers.SerializerMethodField('get_notification_date')
+    action_date=serializers.SerializerMethodField('get_action_date')
     class Meta:
         model=Notification
-        fields='__all__'
+        fields=["case","case_description","notification_date","action_date","notify_type","action_location"]
 
+    def get_case(self,instance):
+        return CaseSerializer(instance.case).data['cnr_number']
+    
+    def get_notification_date(self,instance):
+        if instance.notification_date:
+            return instance.notification_date.strftime('%Y-%m-%dT%H:%M:%S.%f%z')
+        else: return ""
+
+    def get_action_date(self,instance):
+        if instance.action_date:
+            return instance.action_date.strftime('%Y-%m-%dT%H:%M:%S.%f%z')
+        else: return ""
 class CaseSerializer(serializers.ModelSerializer):
     petitioner=serializers.SerializerMethodField('get_petitioner')
     respondent=serializers.SerializerMethodField('get_respondent')
