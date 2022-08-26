@@ -1,7 +1,8 @@
 from django.contrib import admin
 from .models import *
+from import_export.admin import ExportActionMixin
 
-class CaseAdmin(admin.ModelAdmin):
+class CaseAdmin(ExportActionMixin,admin.ModelAdmin):
     list_display=['cnr_number','petitioners','respondents','acts']
 
 admin.site.register(Case,CaseAdmin)
