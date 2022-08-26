@@ -38,6 +38,19 @@ class NotificationSerializer(serializers.ModelSerializer):
     def get_case(self,instance):
         return CaseSerializer(instance.case).data
 
+class AdvocateScoreSerializer(serializers.ModelSerializer):
+    sp=serializers.SerializerMethodField('sp')
+    exp=serializers.SerializerMethodField('exp')
+    fee=serializers.SerializerMethodField('fee')
+    avg=serializers.SerializerMethodField('avg')
+    avg_resolvetime=serializers.SerializerMethodField('avg_resolvetime')
+    activecases=serializers.SerializerMethodField('activecases')
+
+    class Meta:
+        model=Notification
+        fields=["sp","exp","fee","avg","avg_resolvetime","activecases"]
+
+
 class CaseSerializer(serializers.ModelSerializer):
     petitioner=serializers.SerializerMethodField('get_petitioner')
     respondent=serializers.SerializerMethodField('get_respondent')

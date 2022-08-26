@@ -1,3 +1,5 @@
+from re import T
+from typing import Tuple
 from django.db import models
 from petitionFiling.models import *
 from permuser.models import * 
@@ -119,3 +121,10 @@ class TrackCases(models.Model):
 
     def __str__(self):
         return "%s %s" %(self.action_status,self.action_taken_by)
+
+class advocateScore(models.Model):
+    sp= models.IntegerField(null=False)
+    exp= models.IntegerField(null=False)
+    age= models.IntegerField(null=False)
+    avg_resolvetime= models.IntegerField(null=False)
+    activecases= models.ImageField(null=False)

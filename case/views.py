@@ -291,3 +291,50 @@ class DateMonitoring(ListAPIView):
                         "status_code": 400,
                         "data": serializer.errors
                     })
+
+class advocateSuggestor(APIView):
+
+    def advocate_suggestor(sp,exp,fee,age,avg_resolvetime,activecases):
+        import pandas as pd
+        import numpy as np
+        df = pd.read_csv('/Users/suryanshbisen/Desktop/Development Data/Vidhan_SIH/Vidhaan-backend/case/dataset_advocate_performance.csv',index_col=False)
+        del df['Unnamed: 0'],df['id']
+        df['experience (yrs)'] = df['experience (yrs)'].astype(int)
+        df['active cases'] = df['active cases'].astype(int)
+        types_of_cases = ["Arbitration Petition","Civil (Appeal) Petition","Contempt Petition (Civil)","Contempt Petition (Criminal)","Criminal Appeal Petition","Election Petition","Original Suit","Petition for Special Leave to Appeal","Transferred Case Petition","Writ Petition"]
+
+        for i in range(len(types_of_cases)):
+            print(f"{i+1} for {types_of_cases[i]}")
+
+        d = df[df['speciality']==types_of_cases[sp-1]]
+        actual_order=[]
+        inp_order = []
+        features = ["experience (yrs)","fees","age","avg resolve time (days)","active cases"]
+        actual_order = [[exp,"experience (yrs)"],[fee,"fees"],[age,"age"],[avg_resolvetime,"avg resolve time (days)"],[activecases,"active cases"]]
+
+        actual_order = sorted(actual_order,reverse=True)
+        order_list = []
+        for i in range(len(actual_order)):
+            actual_order[i] = str(actual_order[i][1])
+            if actual_order[i]== "experience (yrs)":
+                order_list.append(False)
+            else:
+                order_list.append(True)
+        d = d.sort_values(by=actual_order,ascending=order_list)
+        d = d.reset_index(drop=True)
+        print(d.head())
+        return d.head(3).to_json(orient='records') 
+
+    def post(self,request):
+        #serializer=AdvocateScoreSerializer(data=request.data)
+        data = request.data
+        if data is not None:
+            score = advocateSuggestor.advocate_suggestor(sp=data["sp"],exp=data["exp"],fee=data["fee"],age=data["age"],avg_resolvetime=data["avg_resolvetime"],activecases=data["activecases"])
+            return Response({
+                "score": score
+            })
+        else: 
+            return Response({
+                "status_code": 400,
+                "data": serializer.errors
+           })
