@@ -46,13 +46,12 @@ class DocumentDetails(models.Model):
         return "%s %s" %(self.document_no, self.document_type)
 
 class History(models.Model):
-    cause_list_type=models.CharField(max_length=50, null=True,blank=True)
-    judge=models.ForeignKey(to=Judge,null=True,blank=True,default="",on_delete=models.CASCADE)
+    judge=models.CharField(null=True,blank=True, max_length=50,default="")
     hearing_date=models.DateField(null=True,blank=True,default=0)
     purpose_of_hearing=models.CharField(null=True,blank=True, max_length=50,choices=choice.PURPOSE_OF_HEARING,default="")
 
     def __str__(self):
-        return "%s" %(self.cause_list_type)
+        return "%s" %(self.judge)
 
 
 class Case(models.Model):
