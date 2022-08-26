@@ -1,4 +1,5 @@
 from django.db import models
+import permuser
 from petitionFiling.models import *
 from permuser.models import * 
 
@@ -74,6 +75,7 @@ class Case(models.Model):
     case_status=models.CharField(max_length=50, null=True, choices=choice.CASE_STATUS)
     next_date=models.DateField(null=True,blank=True,default=None) 
 
+    user= models.ForeignKey(to=CustomUser, related_name='case_user', on_delete=models.CASCADE,null=True,blank=True)
     petitioner=models.ManyToManyField(Petitioner,null=True,blank=True,related_name='case_petitioner')
     respondent=models.ManyToManyField(Respondent,null=True,blank=True,related_name='case_respondent')
     advocate=models.ManyToManyField(Advocate,null=True,blank=True,related_name='case_advocate')
