@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import os
 from pickle import APPEND
+from re import T
 import django_heroku
 import dj_database_url
 from datetime import timedelta
@@ -60,7 +61,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',  # required for serving swagger ui's css/js files
     'drf_yasg',
     'graphene_django',
-    'myapp',
+    'import_export',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -77,6 +78,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'vidhaan.urls'
 CORS_ALLOW_ALL_ORIGINS = True
+IMPORT_EXPORT_USE_TRANSACTIONS= True
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

@@ -60,7 +60,7 @@ class CaseDetail(GenericAPIView):
         id=request.query_params.get('id', None)
         try:
             if id:
-                case=cases.get(id=id)
+                case=cases.get(cnr_number=id)
                 serializer=CaseSerializer(case)
                 return Response({
                     "status_code": 200,
@@ -94,8 +94,8 @@ class CaseList(ListAPIView):
         queryset=Case.objects.all()
         query=self.request.query_params.get('query')
         if query is not None:  
-            return queryset.filter(case_status__icontains=query) or queryset.filter(cnr_number__iexact=query) or queryset.filter(petitioner__petitioner_name__icontains=query) or queryset.filter(respondent__respondent_name__icontains=query) 
-        else: 
+            return queryset.filter(cnr_number__iexact=query) or queryset.filter(case_status__icontains=query) or  queryset.filter(petitioner__petitioner_name__icontains=query) or queryset.filter(respondent__respondent_name__icontains=query) 
+        else:
             return queryset
 
 class CaseNotification(ListAPIView): 
