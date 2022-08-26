@@ -30,9 +30,13 @@ class DocumentDetailsSerializer(serializers.ModelSerializer):
         fields='__all__'
 
 class NotificationSerializer(serializers.ModelSerializer):
+    case=serializers.SerializerMethodField('get_case')
     class Meta:
         model=Notification
-        fields='__all__'
+        fields=["case","case_description","notification_date","action_date","is_notification_recieved","notify_to","notify_type","action_location"]
+
+    def get_case(self,instance):
+        return CaseSerializer(instance.case).data
 
 class CaseSerializer(serializers.ModelSerializer):
     petitioner=serializers.SerializerMethodField('get_petitioner')

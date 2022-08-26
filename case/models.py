@@ -98,8 +98,7 @@ class Case(models.Model):
         return ", ".join([str(p) for p in self.act.all()])
 
 class Notification(models.Model):
-    case=models.ManyToManyField(Case,null=True,blank=True,default="",related_name='case_notifications')
-    case_title=models.CharField(max_length=250, null=True,blank=True)
+    case=models.ForeignKey(to=Case,null=True,blank=True,default="",related_name='case_notifications', on_delete=models.CASCADE)
     case_description=models.CharField(max_length=500, null=True,blank=True)
     notification_date=models.DateField(null=True,blank=True,default=None) 
     action_date=models.DateField(null=True,blank=True,default=None) 
