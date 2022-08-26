@@ -85,7 +85,7 @@ class CaseList(ListAPIView):
 
     serializer_class=CaseSerializer
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter]
-    filterset_fields = ['cnr_number', 'registration_number', 'ia__filing_date', 'ia__ia_status' , 'court','petitioner__petitioner_name','respondent__respondent_name','person_involved__person_name','case_status'] 
+    filterset_fields = ['cnr_number', 'registration_number', 'ia__filing_date', 'ia__ia_status' , 'court','petitioner__petitioner_name','respondent__respondent_name','person_involved__person_name','case_status','user'] 
     ordering_fields = ['cnr_number']
     search_fields = ['cnr_number', 'registration_number']
 
@@ -94,7 +94,7 @@ class CaseList(ListAPIView):
         queryset=Case.objects.all()
         query=self.request.query_params.get('query')
         if query is not None:  
-            return queryset.filter(cnr_number__iexact=query) or queryset.filter(case_status__icontains=query) or  queryset.filter(petitioner__petitioner_name__icontains=query) or queryset.filter(respondent__respondent_name__icontains=query)
+            return queryset.filter(id__iexact=query) or queryset.filter(case_status__icontains=query) or  queryset.filter(petitioner__petitioner_name__icontains=query) or queryset.filter(respondent__respondent_name__icontains=query)
         else: 
             return queryset
 

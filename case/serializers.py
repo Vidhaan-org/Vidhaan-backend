@@ -2,7 +2,8 @@ from dataclasses import field
 from pyexpat import model
 from rest_framework import serializers
 from .models import *
-from permuser.serializers import PetitionerSerializer,RespondentSerializer,ActSerializer,AdvocateSerializer
+from permuser.serializers import PetitionerSerializer,RespondentSerializer,ActSerializer,AdvocateSerializer,CustomUserSerializer
+
 
 class IADetailsSerializer(serializers.ModelSerializer):
     class Meta:
@@ -39,6 +40,7 @@ class NotificationSerializer(serializers.ModelSerializer):
         return CaseSerializer(instance.case).data
 
 class CaseSerializer(serializers.ModelSerializer):
+    user=serializers.SerializerMethodField('get_user')
     petitioner=serializers.SerializerMethodField('get_petitioner')
     respondent=serializers.SerializerMethodField('get_respondent')
     act=serializers.SerializerMethodField('get_act')
@@ -50,7 +52,7 @@ class CaseSerializer(serializers.ModelSerializer):
     document=serializers.SerializerMethodField('get_document')
     class Meta:
         model=Case
-        fields=["id","cnr_number", "case_type","filling_number","registration_number","petitioner","respondent","act","advocate","ia","history","order","objection","document","case_status"]
+        fields=["id","cnr_number", "case_type","filling_number","registration_number","petitioner","respondent","act","advocate","ia","history","order","objection","document","case_status","user"]
 
     def get_petitioner(self,instance):
         return PetitionerSerializer(instance.petitioner,many=True).data
@@ -79,6 +81,13 @@ class CaseSerializer(serializers.ModelSerializer):
     def get_document(self,instance):
         return DocumentDetailsSerializer(instance.document,many=True).data
 
+    def get_user(self,instance):
+        return CustomUserSerializer(instance.user).data
+
+class TrackCasesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=TrackCases
+        fields='__all__'
 
 
 class TrackCasesSerializer(serializers.ModelSerializer):
