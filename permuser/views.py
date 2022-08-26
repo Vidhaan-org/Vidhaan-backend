@@ -69,3 +69,10 @@ class SignUp(APIView):
                 "status_code": 400,
                 "data": serializer.errors
             })
+
+class Profile(APIView):
+    def get(self,request):
+        
+        users=CustomUser.objects.all()
+        
+        return Response(CustomUserSerializer(users,many=True).data)

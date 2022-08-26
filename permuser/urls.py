@@ -5,4 +5,6 @@ namespace=['permuser']
 
 urlpatterns=[
     path('',SignUp.as_view()),
+    path('profile/',Profile.as_view()),
+
 ]
