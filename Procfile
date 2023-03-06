@@ -1,1 +1,1 @@
-web: gunicorn vidhaan.wsgi --log-file -
+web: python manage.py migrate && gunicorn mysite.wsgi
