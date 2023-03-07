@@ -44,7 +44,6 @@ CORS_ORIGIN_WHITELIST = [
     "https://vidhaan-backend-production.up.railway.app"
 ]
 CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True
 
 APPEND_SLASH = False
 # Application definition
