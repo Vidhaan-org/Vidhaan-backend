@@ -32,7 +32,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = ["https://*"]
+CSRF_TRUSTED_ORIGINS = ["https://*", "https://vidhaan-backend-production.up.railway.app"]
 
 CORS_ALLOWED_ORIGINS = [
     "https://example.com",
