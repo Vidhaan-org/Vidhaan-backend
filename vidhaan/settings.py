@@ -32,6 +32,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = ["*"]
+
 CORS_ALLOWED_ORIGINS = [
     "https://example.com",
     "https://sub.example.com",
