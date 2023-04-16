@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import os
 from pickle import APPEND
-import django_heroku
 import dj_database_url
 from datetime import timedelta
 
@@ -199,5 +198,4 @@ EMAIL_HOST_USER = 'vidhaan.inbox@gmail.com'
 EMAIL_HOST_PASSWORD = 'akbctlbfyeepyswm'
 EMAIL_USE_TLS = True
 
-django_heroku.settings(locals())
 
