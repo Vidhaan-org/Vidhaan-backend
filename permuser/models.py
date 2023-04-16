@@ -45,7 +45,7 @@ class TabPermission(models.Model):
 
 class Advocate(models.Model):
     advocate_name = models.CharField(null=True,blank=True, max_length=50)
-    # advocate_number = models.IntegerField(null=True,blank=True)
+    advocate_number = models.IntegerField(null=True,blank=True)
     advocate_year = models.IntegerField(null=True,blank=True)
     advocate_mobile = models.IntegerField(null=True,blank=True)
     advocate_email_id = models.CharField(null=True,blank=True, max_length=50)
