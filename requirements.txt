@@ -35,7 +35,6 @@ odfpy==1.4.1
 openpyxl==3.0.10
 packaging==21.3
 promise==2.3
-psycopg2==2.9.3
 psycopg2-binary==2.9.3
 PyJWT==2.4.0
 pyparsing==3.0.9
