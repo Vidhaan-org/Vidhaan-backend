@@ -25,7 +25,7 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from django.conf import settings
 from graphene_django.views import GraphQLView
-from case.schema import schema
+# from case.schema import schema
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -50,6 +50,6 @@ urlpatterns = [
     path('api/token/verify/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('swagger', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    path('graphql', csrf_exempt(GraphQLView.as_view(graphiql =True, schema=schema))),
+#    path('graphql', csrf_exempt(GraphQLView.as_view(graphiql =True, schema=schema))),
     path('user/',include('permuser.urls')),
 ]
