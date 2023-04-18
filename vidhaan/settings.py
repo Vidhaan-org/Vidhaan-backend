@@ -56,7 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'rest_framework',
     'django_filters',
-    # 'corsheaders',
+    'corsheaders',
     'case',
     'permuser',
     'petitionFiling',
@@ -75,7 +75,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     # 'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'corsheaders.middleware.CorsMiddleware'
+    'corsheaders.middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'vidhaan.urls'
