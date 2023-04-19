@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import os
 from pickle import APPEND
-import django_heroku
 import dj_database_url
 from datetime import timedelta
 
@@ -32,7 +31,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = ["https://*", "https://vidhaan-backend-production.up.railway.app"]
+CSRF_TRUSTED_ORIGINS = ["https://*", "https://vidhaan-backend-production.up.railway.app",
+                        "https://vidhaan-backend.fly.dev",
+                        "https://vidhaanweb-ozoeb4u81-vidhaan.vercel.app"]
 
 CORS_ALLOWED_ORIGINS = [
     "https://example.com",
@@ -40,6 +41,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
     "http://127.0.0.1:9000",
     "https://vidhaan-backend-production.up.railway.app",
+    "https://vidhaan-backend.fly.dev",
+    "https://vidhaanweb-ozoeb4u81-vidhaan.vercel.app",
     "https://*"
 ]
 CORS_ORIGIN_WHITELIST = [
@@ -109,10 +112,10 @@ WSGI_APPLICATION = 'vidhaan.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default='postgres://postgres:4e1Y2IodXHB83MT@vidhaan-backend-db.flycast:5432',
+        conn_max_age=600,
+    )
 }
 
 # GRAPHENE = {
@@ -173,11 +176,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
+STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+
+STATICFILES_DIR = {
+    os.path.join(BASE_DIR , "public/static")
+}
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
@@ -199,5 +204,4 @@ EMAIL_HOST_USER = 'vidhaan.inbox@gmail.com'
 EMAIL_HOST_PASSWORD = 'akbctlbfyeepyswm'
 EMAIL_USE_TLS = True
 
-django_heroku.settings(locals())
 
